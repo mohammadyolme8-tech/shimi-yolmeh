@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آموزش شیمی عبدالرشید یلمه</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f3f7fc;
+    color: #26354a;
+    line-height: 1.9;
+}
+
+header {
+    background: linear-gradient(135deg, #073b70, #087eaa);
+    color: white;
+    padding: 30px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+nav {
+    background: #052d52;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+}
+
+nav button {
+    color: white;
+    background: transparent;
+    border: none;
+    padding: 9px 15px;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+nav button:hover {
+    background: #087eaa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.hero {
+    background: linear-gradient(135deg, #d8efff, #edf8ff);
+    padding: 65px 20px;
+    text-align: center;
+    border-radius: 18px;
+    margin-top: 25px;
+}
+
+.hero h2 {
+    font-size: 30px;
+    color: #064477;
+}
+
+.hero p {
+    font-size: 17px;
+}
+
+button.main-btn {
+    background: #087eaa;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 8px;
+}
+
+button.main-btn:hover {
+    background: #05577c;
+}
+
+.section {
+    padding: 35px 0;
+}
+
+.section h2 {
+    color: #064477;
+    text-align: center;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #00000010;
+    text-align: center;
+}
+
+.card h3 {
+    color: #087eaa;
+}
+
+.card button {
+    background: #087eaa;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.page {
+    display: none;
+    min-height: 65vh;
+    padding: 25px 0;
+}
+
+.page.active {
+    display: block;
+}
+
+.lesson {
+    background: white;
+    border-right: 5px solid #087eaa;
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #0000000d;
+}
+
+.lesson button {
+    background: #087eaa;
+    color: white;
+    border: none;
+    padding: 9px 17px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.contact {
+    background: #e4f3ff;
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.phone {
+    color: #064477;
+    font-size: 25px;
+    font-weight: bold;
+    direction: ltr;
+}
+
+footer {
+    background: #052d52;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 35px;
+}
+
+.question {
+    background: white;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 12px;
+}
+
+.question label {
+    display: block;
+    cursor: pointer;
+}
+
+@media(max-width: 600px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+
+    nav button {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>آموزش شیمی عبدالرشید یلمه</h1>
+    <p>یادگیری آسان، مفهومی و لذت‌بخش شیمی</p>
+</header>
+
+<nav id="mainNav">
+    <button onclick="showPage('homePage')">صفحه اصلی</button>
+    <button onclick="showPage('coursesPage')">دوره‌ها</button>
+    <button onclick="showPage('aboutPage')">درباره استاد</button>
+    <button onclick="showPage('featuresPage')">امکانات سایت</button>
+    <button onclick="showPage('contactPage')">ارتباط با ما</button>
+</nav>
+
+<main class="container">
+
+<!-- صفحه اصلی -->
+<div id="homePage" class="page active">
+
+    <section class="hero">
+        <h2>به دنیای شگفت‌انگیز شیمی خوش آمدید!</h2>
+        <p>
+            در این سایت می‌توانید شیمی را ساده‌تر و بهتر یاد بگیرید.
+        </p>
+        <button class="main-btn" onclick="showPage('coursesPage')">
+            شروع یادگیری
+        </button>
+    </section>
+
+    <section class="section">
+        <h2>دوره‌های آموزشی</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>شیمی دهم</h3>
+                <p>آموزش فصل به فصل شیمی دهم</p>
+                <button onclick="showPage('grade10Page')">ورود به دوره</button>
+            </div>
+
+            <div class="card">
+                <h3>شیمی یازدهم</h3>
+                <p>آموزش مفهومی شیمی یازدهم</p>
+                <button onclick="showPage('grade11Page')">ورود به دوره</button>
+            </div>
+
+            <div class="card">
+                <h3>شیمی دوازدهم</h3>
+                <p>آمادگی برای امتحان و کنکور</p>
+                <button onclick="showPage('grade12Page')">ورود به دوره</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>امکانات آموزشی</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>نمونه سؤالات</h3>
+                <p>تمرین و آمادگی برای امتحانات</p>
+                <button onclick="showPage('questionsPage')">مشاهده</button>
+            </div>
+
+            <div class="card">
+                <h3>جزوه‌های آموزشی</h3>
+                <p>دسترسی به مطالب آموزشی</p>
+                <button onclick="showPage('notesPage')">مشاهده</button>
+            </div>
+
+            <div class="card">
+                <h3>آزمون آنلاین</h3>
+                <p>سنجش میزان یادگیری</p>
+                <button onclick="showPage('quizPage')">شروع آزمون</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- صفحه دوره‌ها -->
+<div id="coursesPage" class="page">
+    <h2>دوره‌های آموزشی شیمی</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>شیمی دهم</h3>
+            <p>سه فصل آموزشی</p>
+            <button onclick="showPage('grade10Page')">مشاهده دوره</button>
+        </div>
+
+        <div class="card">
+            <h3>شیمی یازدهم</h3>
+            <p>مطالب آموزشی یازدهم</p>
+            <button onclick="showPage('grade11Page')">مشاهده دوره</button>
+        </div>
+
+        <div class="card">
+            <h3>شیمی دوازدهم</h3>
+            <p>مطالب آموزشی دوازدهم</p>
+            <button onclick="showPage('grade12Page')">مشاهده دوره</button>
+        </div>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- شیمی دهم -->
+<div id="grade10Page" class="page">
+    <h2>آموزش شیمی دهم</h2>
+    <p>به بخش آموزش شیمی دهم خوش آمدید.</p>
+
+    <div class="lesson">
+        <h3>فصل اول: کیهان، زادگاه الفبای هستی</h3>
+        <p>آشنایی با عنصرها، اتم‌ها و جدول تناوبی</p>
+        <button onclick="alert('درسنامه فصل اول به‌زودی اضافه می‌شود!')">مشاهده درسنامه</button>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل دوم: ردپای گازها در زندگی</h3>
+        <p>آشنایی با گازها و ویژگی‌های آن‌ها</p>
+        <button onclick="alert('درسنامه فصل دوم به‌زودی اضافه می‌شود!')">مشاهده درسنامه</button>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل سوم: آب، آهنگ زندگی</h3>
+        <p>آشنایی با آب و ویژگی‌های شیمیایی آن</p>
+        <button onclick="alert('درسنامه فصل سوم به‌زودی اضافه می‌شود!')">مشاهده درسنامه</button>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت به صفحه اصلی</button>
+</div>
+
+<!-- شیمی یازدهم -->
+<div id="grade11Page" class="page">
+    <h2>آموزش شیمی یازدهم</h2>
+
+    <div class="lesson">
+        <h3>فصل اول: قدر هدایای زمینی را بدانیم</h3>
+        <p>آشنایی با منابع طبیعی و مواد شیمیایی</p>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل دوم: در پی غذای سالم</h3>
+        <p>آشنایی با شیمی مواد غذایی</p>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل سوم: پوشاک، نیازی پایان‌ناپذیر</h3>
+        <p>آشنایی با مواد سازنده پوشاک</p>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- شیمی دوازدهم -->
+<div id="grade12Page" class="page">
+    <h2>آموزش شیمی دوازدهم</h2>
+
+    <div class="lesson">
+        <h3>فصل اول: مولکول‌ها در خدمت تندرستی</h3>
+        <p>آشنایی با ترکیب‌های شیمیایی و کاربرد آن‌ها</p>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل دوم: آسایش و رفاه در سایه شیمی</h3>
+        <p>آشنایی با کاربردهای شیمی در زندگی</p>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل سوم: شیمی جلوه‌ای از هنر، زیبایی و ماندگاری</h3>
+        <p>آشنایی با مواد و ساختار آن‌ها</p>
+    </div>
+
+    <div class="lesson">
+        <h3>فصل چهارم: شیمی، راهی به سوی آینده‌ای روشن‌تر</h3>
+        <p>آشنایی با نقش شیمی در آینده</p>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- نمونه سوالات -->
+<div id="questionsPage" class="page">
+    <h2>نمونه سؤالات شیمی</h2>
+
+    <div class="lesson">
+        <h3>سؤالات امتحانی شیمی دهم</h3>
+        <p>سؤالات تشریحی و تستی در این بخش قرار می‌گیرند.</p>
+    </div>
+
+    <div class="lesson">
+        <h3>سؤالات امتحانی شیمی یازدهم</h3>
+        <p>تمرین برای تسلط بیشتر بر مطالب.</p>
+    </div>
+
+    <div class="lesson">
+        <h3>سؤالات امتحانی شیمی دوازدهم</h3>
+        <p>آمادگی برای امتحانات نهایی.</p>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- جزوه‌ها -->
+<div id="notesPage" class="page">
+    <h2>جزوه‌های آموزشی</h2>
+
+    <div class="lesson">
+        <h3>جزوه شیمی دهم</h3>
+        <p>فایل جزوه در آینده در این قسمت قرار می‌گیرد.</p>
+    </div>
+
+    <div class="lesson">
+        <h3>جزوه شیمی یازدهم</h3>
+        <p>فایل جزوه در آینده در این قسمت قرار می‌گیرد.</p>
+    </div>
+
+    <div class="lesson">
+        <h3>جزوه شیمی دوازدهم</h3>
+        <p>فایل جزوه در آینده در این قسمت قرار می‌گیرد.</p>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- آزمایش‌ها -->
+<div id="experimentsPage" class="page">
+    <h2>آزمایش‌های جذاب شیمی</h2>
+
+    <div class="lesson">
+        <h3>دنیای رنگارنگ شیمی</h3>
+        <p>آشنایی با تغییر رنگ مواد و مفهوم شناساگرها.</p>
+    </div>
+
+    <div class="lesson">
+        <h3>آشنایی با اسیدها و بازها</h3>
+        <p>یادگیری تفاوت اسید و باز با مثال‌های علمی.</p>
+    </div>
+
+    <p>آزمایش‌ها باید فقط با نظارت معلم و رعایت نکات ایمنی انجام شوند.</p>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- امکانات -->
+<div id="featuresPage" class="page">
+    <h2>امکانات سایت</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>آزمون آنلاین</h3>
+            <p>سنجش آموخته‌ها</p>
+            <button onclick="showPage('quizPage')">ورود</button>
+        </div>
+
+        <div class="card">
+            <h3>نمونه سؤالات</h3>
+            <p>تمرین‌های آموزشی</p>
+            <button onclick="showPage('questionsPage')">ورود</button>
+        </div>
+
+        <div class="card">
+            <h3>آزمایش‌های شیمی</h3>
+            <p>آشنایی با مفاهیم علمی</p>
+            <button onclick="showPage('experimentsPage')">ورود</button>
+        </div>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- درباره استاد -->
+<div id="aboutPage" class="page">
+    <h2>درباره استاد</h2>
+
+    <div class="card">
+        <h3>استاد عبدالرشید یلمه</h3>
+        <p>
+            این وب‌سایت با هدف آموزش ساده و مفهومی شیمی
+            و کمک به یادگیری بهتر دانش‌آموزان طراحی شده است.
+        </p>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- ارتباط با ما -->
+<div id="contactPage" class="page">
+    <h2>ارتباط با ما</h2>
+
+    <div class="contact">
+        <p>برای ارتباط و دریافت اطلاعات بیشتر تماس بگیرید:</p>
+        <p class="phone">09399044705</p>
+        <a href="tel:09399044705">تماس با استاد</a>
+    </div>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+<!-- آزمون آنلاین -->
+<div id="quizPage" class="page">
+    <h2>آزمون آنلاین شیمی</h2>
+    <p>به پرسش‌های زیر پاسخ بده و نتیجه را ببین.</p>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <h3>۱. نماد شیمیایی اکسیژن چیست؟</h3>
+            <label><input type="radio" name="q1" value="a"> H</label>
+            <label><input type="radio" name="q1" value="b"> O</label>
+            <label><input type="radio" name="q1" value="c"> C</label>
+        </div>
+
+        <div class="question">
+            <h3>۲. فرمول شیمیایی آب چیست؟</h3>
+            <label><input type="radio" name="q2" value="a"> CO2</label>
+            <label><input type="radio" name="q2" value="b"> O2</label>
+            <label><input type="radio" name="q2" value="c"> H2O</label>
+        </div>
+
+        <div class="question">
+            <h3>۳. کدام ذره بار منفی دارد؟</h3>
+            <label><input type="radio" name="q3" value="a"> الکترون</label>
+            <label><input type="radio" name="q3" value="b"> پروتون</label>
+            <label><input type="radio" name="q3" value="c"> نوترون</label>
+        </div>
+
+        <button type="button" class="main-btn" onclick="checkQuiz()">
+            مشاهده نتیجه
+        </button>
+
+    </form>
+
+    <h3 id="quizResult"></h3>
+
+    <button class="main-btn" onclick="showPage('homePage')">بازگشت</button>
+</div>
+
+</main>
+
+<footer>
+    <p>وب‌سایت آموزش شیمی عبدالرشید یلمه</p>
+    <p>تمام حقوق محفوظ است.</p>
+</footer>
+
+<script>
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    document.getElementById('mainNav').style.display =
+        pageId === 'homePage' ? 'flex' : 'none';
+
+    window.scrollTo(0, 0);
+}
+
+function checkQuiz() {
+    let score = 0;
+
+    if (document.querySelector('input[name="q1"]:checked')?.value === 'b') {
+        score++;
+    }
+
+    if (document.querySelector('input[name="q2"]:checked')?.value === 'c') {
+        score++;
+    }
+
+    if (document.querySelector('input[name="q3"]:checked')?.value === 'a') {
+        score++;
+    }
+
+    document.getElementById('quizResult').innerText =
+        'نمره شما: ' + score + ' از 3';
+}
+</script>
+
+</body>
+</html>
