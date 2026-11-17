@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="آموزش مفهومی شیمی دهم، یازدهم و دوازدهم با عبدالرشید یلمه؛ درسنامه، نکته‌های مهم و آزمون‌های تمرینی.">
+  <meta name="theme-color" content="#101b2b">
+  <title>شیمی یلمه | آموزش شیمی عبدالرشید یلمه</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+    :root{
+      --navy:#101b2b;--navy2:#17283d;--gold:#c8a96b;--gold2:#e4cf9d;
+      --cream:#f7f4ed;--paper:#fffefa;--ink:#1b2635;--muted:#6d7785;
+      --line:rgba(200,169,107,.25);--shadow:0 22px 60px rgba(16,27,43,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:'Vazirmatn',Tahoma,sans-serif;line-height:1.9}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    .wrap{width:min(1140px,92%);margin:auto}
+    .topbar{background:#0b1421;color:#d9dce2;font-size:13px;padding:8px 0}
+    .topbar .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    header{position:sticky;top:0;z-index:20;background:rgba(16,27,43,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(228,207,157,.15)}
+    .nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff}
+    .brand-mark{width:43px;height:43px;border:1px solid var(--gold);border-radius:13px;display:grid;place-items:center;color:var(--gold2);font-weight:900;font-size:21px}
+    .brand strong{display:block;font-size:18px;letter-spacing:-.5px}
+    .brand small{display:block;color:#b6bfca;font-size:11px;margin-top:-3px}
+    .links{display:flex;align-items:center;gap:27px;color:#e0e5ec;font-size:13px}
+    .links a{transition:.2s}.links a:hover{color:var(--gold2)}
+    .nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:9px;padding:10px 19px;font-weight:700;font-size:13px;transition:.2s}
+    .nav-cta,.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#182235}
+    .nav-cta:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 20%,rgba(200,169,107,.18),transparent 28%),linear-gradient(125deg,#101b2b,#1b3049 65%,#142235);color:white;padding:92px 0 100px}
+    .hero:after{content:"";position:absolute;width:470px;height:470px;border:1px solid rgba(228,207,157,.13);border-radius:50%;left:-150px;top:-170px;box-shadow:0 0 0 45px rgba(228,207,157,.025),0 0 0 95px rgba(228,207,157,.02)}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .eyebrow{color:var(--gold2);font-size:12px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+    .eyebrow:before{content:"";width:30px;height:1px;background:var(--gold)}
+    h1{font-size:clamp(34px,5vw,58px);line-height:1.45;margin:18px 0 16px;font-weight:900;letter-spacing:-1.5px}
+    h1 span{color:var(--gold2)}
+    .hero p{color:#c6cfda;max-width:620px;font-size:15px;margin:0 0 28px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-outline{border:1px solid rgba(228,207,157,.55);color:#f6ead0}
+    .hero-note{margin-top:24px;color:#aeb9c7;font-size:12px}
+    .hero-panel{border:1px solid rgba(228,207,157,.28);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));border-radius:22px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.2)}
+    .seal{width:78px;height:78px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:32px;margin-bottom:23px}
+    .hero-panel h3{font-size:20px;margin:0 0 8px}.hero-panel p{font-size:13px;margin:0;color:#c4ccd5}
+    .panel-line{height:1px;background:var(--line);margin:22px 0}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+    .stats strong{display:block;color:var(--gold2);font-size:21px}.stats small{font-size:10px;color:#c4ccd5}
+    section{padding:78px 0}
+    .section-head{text-align:center;max-width:680px;margin:0 auto 38px}
+    .kicker{color:#9b7b42;font-size:12px;font-weight:800}
+    .section-head h2{font-size:clamp(25px,3vw,36px);margin:7px 0 9px;color:var(--navy)}
+    .section-head p{color:var(--muted);font-size:14px;margin:0}
+    .grades{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grade{background:var(--paper);border:1px solid #ece5d8;border-radius:17px;padding:25px;box-shadow:0 8px 30px rgba(16,27,43,.045);transition:.25s;position:relative;overflow:hidden}
+    .grade:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#d7c398}
+    .grade-num{font-size:12px;color:#9b7b42;font-weight:800}
+    .grade h3{font-size:22px;margin:4px 0 8px;color:var(--navy)}
+    .grade p{font-size:13px;color:var(--muted);min-height:50px}
+    .grade ul{padding-right:18px;color:#596574;font-size:12px;line-height:2.2}
+    .grade a{display:inline-block;margin-top:8px;color:#98743a;font-size:13px;font-weight:800}
+    .grade a:after{content:" ←";font-size:17px}
+    .features{background:#fffefa}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{padding:25px;border:1px solid #eee7da;border-radius:15px;background:white}
+    .feature-icon{width:44px;height:44px;border-radius:12px;background:#f3ecdd;color:#98743a;display:grid;place-items:center;font-size:20px}
+    .feature h3{font-size:16px;margin:14px 0 5px}.feature p{font-size:13px;color:var(--muted);margin:0}
+    .lessons{background:#f1eee7}
+    .lesson-tools{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+    .lesson-tools input{width:min(360px,100%);border:1px solid #ded6c7;background:white;border-radius:9px;padding:11px 14px;outline:none}
+    .lesson-tools input:focus{border-color:var(--gold)}
+    .tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+    .tab{border:1px solid #d9d0c0;background:transparent;padding:9px 18px;border-radius:8px;cursor:pointer;color:#596574;font-size:13px}
+    .tab.active{background:var(--navy);border-color:var(--navy);color:white}
+    .lesson-list{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+    .lesson{background:white;border:1px solid #e9e2d6;border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;gap:15px;align-items:center}
+    .lesson h4{margin:0;font-size:14px}.lesson p{margin:4px 0 0;color:var(--muted);font-size:11px}
+    .lesson .tag{font-size:10px;color:#98743a;background:#f7f0e2;padding:4px 8px;border-radius:20px;white-space:nowrap}
+    .quiz{background:var(--navy);color:white}
+    .quiz .section-head h2{color:white}.quiz .section-head p{color:#b8c3d0}
+    .quiz-card{max-width:760px;margin:auto;background:#fffefa;color:var(--ink);border-radius:18px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+    .quiz-top{display:flex;justify-content:space-between;gap:12px;color:#98743a;font-size:12px;font-weight:800}
+    .quiz-card h3{font-size:18px;margin:18px 0}
+    .answers{display:grid;gap:10px}
+    .answer{border:1px solid #e7dfd1;background:white;border-radius:9px;padding:12px 14px;text-align:right;cursor:pointer;font-size:13px;color:#344052}
+    .answer:hover{border-color:var(--gold)}
+    .answer.selected{border-color:#a88345;background:#f8f1e4}
+    .answer.correct{border-color:#4b8a67;background:#edf7f0}
+    .answer.wrong{border-color:#c26a63;background:#fff0ee}
+    .quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}
+    .quiz-actions button{border:0;cursor:pointer}
+    .quiz-result{font-size:13px;color:#526071}
+    .contact{background:#fffefa}
+    .contact-box{display:grid;grid-template-columns:1fr 1fr;gap:35px;background:linear-gradient(120deg,#14243a,#1d3550);color:white;border-radius:20px;padding:38px;align-items:center}
+    .contact-box h2{font-size:28px;margin:0 0 8px}.contact-box p{color:#c4ced9;font-size:13px;margin:0}
+    .contact-details{display:grid;gap:12px}
+    .contact-item{border:1px solid rgba(228,207,157,.25);border-radius:10px;padding:13px 16px;color:#f2e5c8;font-size:14px}
+    .contact-item small{display:block;color:#aeb9c7;font-size:10px}
+    footer{background:#0b1421;color:#aeb9c7;padding:25px 0;font-size:11px}
+    footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:25px}
+    @media(max-width:800px){.links{display:none}.hero-grid{grid-template-columns:1fr;gap:30px}.hero{padding:65px 0}.hero-panel{max-width:500px}.grades,.feature-grid{grid-template-columns:1fr}.contact-box{grid-template-columns:1fr}.lesson-list{grid-template-columns:1fr}}
+    @media(max-width:460px){.nav{height:70px}.brand strong{font-size:15px}.hero-panel{padding:22px}.stats strong{font-size:18px}.quiz-card{padding:20px}.contact-box{padding:25px}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="wrap"><span>آموزش مفهومی و هدفمند شیمی</span><span>ویژه دانش‌آموزان پایه‌های دهم، یازدهم و دوازدهم</span></div></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#home"><span class="brand-mark">ش</span><span><strong>شیمی یلمه</strong><small>آموزش شیمی عبدالرشید یلمه</small></span></a>
+      <nav class="links"><a href="#home">خانه</a><a href="#courses">پایه‌های تحصیلی</a><a href="#lessons">درسنامه‌ها</a><a href="#quiz">آزمون آنلاین</a><a href="#contact">ارتباط با ما</a></nav>
+      <a class="nav-cta" href="#courses">شروع یادگیری</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">دانش، دقت، درک عمیق‌تر</div>
+          <h1>شیمی را <span>مفهومی</span> یاد بگیر؛<br>با اطمینان پیش برو.</h1>
+          <p>در شیمی یلمه، مفاهیم مهم شیمی را مرحله‌به‌مرحله مرور کن، نکته‌های کلیدی را بشناس و با آزمون‌های تمرینی میزان یادگیری خودت را بسنج.</p>
+          <div class="hero-actions"><a class="btn btn-gold" href="#courses">مشاهده دوره‌ها</a><a class="btn btn-outline" href="#lessons">رفتن به درسنامه‌ها</a></div>
+          <div class="hero-note">آموزش شیمی با عبدالرشید یلمه</div>
+        </div>
+        <aside class="hero-panel">
+          <div class="seal">∑</div>
+          <h3>یادگیری با نظم و درک</h3>
+          <p>از شناخت مفاهیم پایه تا حل مسئله؛ هر قدم برای فهم بهتر شیمی طراحی شده است.</p>
+          <div class="panel-line"></div>
+          <div class="stats"><div><strong>۱۰</strong><small>پایه دهم</small></div><div><strong>۱۱</strong><small>پایه یازدهم</small></div><div><strong>۱۲</strong><small>پایه دوازدهم</small></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="wrap">
+        <div class="section-head"><div class="kicker">مسیر آموزشی</div><h2>پایه تحصیلی خودت را انتخاب کن</h2><p>مطالب را بر اساس پایه تحصیلی دنبال کن و برای مرور، از درسنامه‌ها و آزمون‌های تمرینی کمک بگیر.</p></div>
+        <div class="grades">
+          <article class="grade"><div class="grade-num">پایه دهم · ۱۰</div><h3>شروع با مفاهیم بنیادین</h3><p>آشنایی با جهان اتم‌ها، مواد و زبان علمی شیمی.</p><ul><li>ساختار اتم و جدول دوره‌ای</li><li>پیوندها و ساختار مواد</li><li>واکنش‌ها و محاسبات پایه</li></ul><a href="#lessons" data-jump="10">مشاهده درس‌های دهم</a></article>
+          <article class="grade"><div class="grade-num">پایه یازدهم · ۱۱</div><h3>درک عمیق‌تر واکنش‌ها</h3><p>پیوند دادن مفاهیم شیمی به پدیده‌های پیرامون.</p><ul><li>مواد و نقش آن‌ها در زندگی</li><li>شیمی در خدمت سلامت</li><li>سرعت و عوامل مؤثر بر واکنش</li></ul><a href="#lessons" data-jump="11">مشاهده درس‌های یازدهم</a></article>
+          <article class="grade"><div class="grade-num">پایه دوازدهم · ۱۲</div><h3>آمادگی برای جمع‌بندی</h3><p>مرور مفاهیم مهم و تقویت مهارت تحلیل مسئله.</p><ul><li>مولکول‌ها و نیروهای بین‌مولکولی</li><li>اکسایش و کاهش</li><li>اسیدها، بازها و تعادل</li></ul><a href="#lessons" data-jump="12">مشاهده درس‌های دوازدهم</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="wrap">
+        <div class="section-head"><div class="kicker">روش یادگیری</div><h2>یک مسیر روشن برای پیشرفت</h2><p>یادگیری مؤثر فقط حفظ کردن فرمول‌ها نیست؛ باید مفهوم را بفهمی و بتوانی از آن استفاده کنی.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon">⌘</div><h3>درسنامه‌های منظم</h3><p>موضوعات به بخش‌های کوچک‌تر تقسیم شده‌اند تا مرور و یادگیری آسان‌تر باشد.</p></article>
+          <article class="feature"><div class="feature-icon">✦</div><h3>نکته‌های کلیدی</h3><p>روی تعریف‌ها، ارتباط مفاهیم و نکته‌های مهم هر مبحث تمرکز کن.</p></article>
+          <article class="feature"><div class="feature-icon">✓</div><h3>آزمون و ارزیابی</h3><p>با پرسش‌های چهارگزینه‌ای تمرینی، میزان درک خودت را بررسی کن.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lessons" id="lessons">
+      <div class="wrap">
+        <div class="section-head"><div class="kicker">کتابخانه آموزشی</div><h2>درسنامه‌های شیمی</h2><p>پایه موردنظر را انتخاب کن یا عنوان یک مبحث را جست‌وجو کن.</p></div>
+        <div class="tabs" role="tablist"><button class="tab active" data-grade="10">دهم</button><button class="tab" data-grade="11">یازدهم</button><button class="tab" data-grade="12">دوازدهم</button></div>
+        <div class="lesson-tools"><input id="search" type="search" placeholder="جست‌وجوی عنوان درس..." aria-label="جست‌وجوی درس"></div>
+        <div class="lesson-list" id="lessonList"></div>
+      </div>
+    </section>
+
+    <section class="quiz" id="quiz">
+      <div class="wrap">
+        <div class="section-head"><div class="kicker">خودآزمایی</div><h2>دانسته‌هایت را بسنج</h2><p>یک آزمون کوتاه نمونه برای مرور مفاهیم پایه شیمی.</p></div>
+        <div class="quiz-card">
+          <div class="quiz-top"><span id="questionCount">پرسش ۱ از ۵</span><span>آزمون تمرینی</span></div>
+          <h3 id="questionText"></h3>
+          <div class="answers" id="answers"></div>
+          <div class="quiz-actions"><button class="btn btn-gold" id="nextBtn">پرسش بعدی</button><span class="quiz-result" id="quizResult">یک گزینه را انتخاب کن.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div><div class="eyebrow">در تماس باشیم</div><h2>ارتباط با ما</h2><p>برای دریافت اطلاعات بیشتر درباره آموزش شیمی و پرسش‌های مربوط به کلاس‌ها، از راه ارتباطی زیر استفاده کنید.</p></div>
+          <div class="contact-details">
+            <a class="contact-item" href="tel:09399044705"><small>شماره تماس</small>۰۹۳۹۹۰۴۴۷۰۵</a>
+            <div class="contact-item"><small>مدرس شیمی</small>عبدالرشید یلمه</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>© شیمی یلمه | آموزش شیمی عبدالرشید یلمه</span><span>یادگیری عمیق، پیشرفت ماندگار</span></div></footer>
+
+  <script>
+    const lessons = {
+      10: [
+        ["ساختار اتم و ذره‌های زیراتمی","پروتون، نوترون، الکترون و مفهوم عدد اتمی و جرمی"],
+        ["ایزوتوپ‌ها و جرم اتمی میانگین","شناخت ایزوتوپ‌ها و ارتباط آن‌ها با جرم اتمی"],
+        ["جدول دوره‌ای عنصرها","آرایش عنصرها و روندهای کلی در جدول دوره‌ای"],
+        ["پیوند یونی و ترکیب‌های یونی","تشکیل یون‌ها و آشنایی با فرمول ترکیب‌های یونی"],
+        ["پیوند کووالانسی","اشتراک‌گذاری الکترون‌ها و تشکیل مولکول‌ها"],
+        ["واکنش شیمیایی و معادله‌نویسی","نمایش واکنش‌ها و قانون پایستگی جرم"]
+      ],
+      11: [
+        ["ساختار لوویس و شکل مولکول‌ها","نمایش الکترون‌های ظرفیتی و بررسی شکل مولکول"],
+        ["نیروهای بین‌مولکولی","آشنایی با نیروهای جاذبه میان مولکول‌ها"],
+        ["محلول‌ها و غلظت","حل‌شونده، حلال و بیان کمی غلظت محلول"],
+        ["سرعت واکنش شیمیایی","بررسی عوامل مؤثر بر سرعت انجام واکنش"],
+        ["گرماشیمی","تغییر انرژی در واکنش‌ها و مفهوم آنتالپی"],
+        ["شیمی و سلامت","نگاهی علمی به مواد و ترکیب‌های مؤثر در زندگی"]
+      ],
+      12: [
+        ["مولکول‌ها و برهم‌کنش‌ها","ساختار مولکولی و ارتباط آن با خواص مواد"],
+        ["ترموشیمی و انرژی واکنش","بررسی تغییرات انرژی در فرایندهای شیمیایی"],
+        ["اکسایش و کاهش","انتقال الکترون و تشخیص عدد اکسایش"],
+        ["سلول‌های الکتروشیمیایی","تبدیل انرژی شیمیایی و الکتریکی"],
+        ["اسیدها و بازها","شناخت رفتار اسیدی و بازی مواد"],
+        ["تعادل شیمیایی","تعادل پویا و عوامل مؤثر بر جابه‌جایی آن"]
+      ]
+    };
+    let activeGrade = "10";
+    const list = document.getElementById("lessonList");
+    const search = document.getElementById("search");
+    function renderLessons(){
+      const term = search.value.trim().toLowerCase();
+      const items = lessons[activeGrade].filter(x => (x[0]+" "+x[1]).toLowerCase().includes(term));
+      list.innerHTML = items.length ? items.map((x,i)=>`<article class="lesson"><div><h4>${x[0]}</h4><p>${x[1]}</p></div><span class="tag">درس ${i+1}</span></article>`).join("") : '<div class="empty">موردی با این عنوان پیدا نشد.</div>';
+    }
+    document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+      document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active"); activeGrade=btn.dataset.grade; renderLessons();
+    }));
+    document.querySelectorAll("[data-jump]").forEach(link=>link.addEventListener("click",()=>{
+      activeGrade=link.dataset.jump;
+      document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.grade===activeGrade));
+      renderLessons();
+    }));
+    search.addEventListener("input",renderLessons);
+    renderLessons();
+
+    const questions=[
+      {q:"کدام ذره بار الکتریکی منفی دارد؟",a:["پروتون","نوترون","الکترون","هسته"],c:2,e:"الکترون دارای بار منفی است؛ پروتون مثبت و نوترون بدون بار است."},
+      {q:"عدد اتمی یک عنصر نشان‌دهنده چیست؟",a:["تعداد پروتون‌ها","تعداد نوترون‌ها","جرم اتم","تعداد لایه‌ها"],c:0,e:"عدد اتمی برابر تعداد پروتون‌های هسته است."},
+      {q:"در پیوند یونی معمولاً چه اتفاقی رخ می‌دهد؟",a:["اشتراک الکترون","انتقال الکترون","اشتراک پروتون","تغییر هسته"],c:1,e:"در پیوند یونی، انتقال الکترون می‌تواند به تشکیل یون‌های مثبت و منفی منجر شود."},
+      {q:"کدام مورد می‌تواند سرعت بسیاری از واکنش‌ها را افزایش دهد؟",a:["کاهش دما","کاهش غلظت","افزایش دما","کاهش سطح تماس"],c:2,e:"افزایش دما معمولاً تعداد برخوردهای مؤثر را بیشتر می‌کند."},
+      {q:"در یک واکنش شیمیایی معمولی، کدام قانون برقرار است؟",a:["پایستگی جرم","ناپدید شدن اتم‌ها","تبدیل عنصر به عنصر دیگر","از بین رفتن ماده"],c:0,e:"در واکنش شیمیایی معمولی، جرم کل مواد واکنش‌دهنده و فرآورده‌ها برابر می‌ماند."}
+    ];
+    let qi=0, chosen=null, score=0, answered=false;
+    const qText=document.getElementById("questionText"), answers=document.getElementById("answers");
+    const count=document.getElementById("questionCount"), result=document.getElementById("quizResult"), next=document.getElementById("nextBtn");
+    function showQuestion(){
+      chosen=null;answered=false;const q=questions[qi];count.textContent=`پرسش ${qi+1} از ${questions.length}`;
+      qText.textContent=q.q;result.textContent="یک گزینه را انتخاب کن.";next.textContent=qi===questions.length-1?"نمایش نتیجه":"پرسش بعدی";
+      answers.innerHTML=q.a.map((a,i)=>`<button class="answer" type="button" data-i="${i}">${["الف","ب","ج","د"][i]}) ${a}</button>`).join("");
+      answers.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>selectAnswer(Number(b.dataset.i))));
+    }
+    function selectAnswer(i){
+      if(answered)return;chosen=i;answered=true;const q=questions[qi];
+      answers.querySelectorAll("button").forEach((b,j)=>{if(j===q.c)b.classList.add("correct");if(j===i&&i!==q.c)b.classList.add("wrong");});
+      if(i===q.c){score++;result.textContent="آفرین! پاسخ درست است. "+q.e;}else{result.textContent="این گزینه درست نیست. "+q.e;}
+    }
+    next.addEventListener("click",()=>{
+      if(!answered){result.textContent="ابتدا یکی از گزینه‌ها را انتخاب کن.";return;}
+      if(qi<questions.length-1){qi++;showQuestion();}
+      else{qText.textContent=`آزمون تمام شد؛ از ${questions.length} پرسش، ${score} پاسخ درست داشتی.`;answers.innerHTML="";count.textContent="نتیجه آزمون";result.textContent="برای تکرار آزمون، صفحه را تازه‌سازی کن.";next.disabled=true;next.style.opacity=".5";}
+    });
+    showQuestion();
+  </script>
+</body>
+</html>
