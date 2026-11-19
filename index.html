@@ -1,173 +1,1085 @@
-from pathlib import Path
-
-html = """<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="آموزش شیمی دهم، یازدهم و دوازدهم با عبدالرشید یلمه">
-<title>شیمی یلمه | آموزش شیمی</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap');
-:root{--n:#101b2b;--n2:#1b3049;--g:#e4cf9d;--bg:#f7f4ed;--ink:#1b2635;--muted:#6d7785}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:2}a{text-decoration:none;color:inherit}button,input{font:inherit}.wrap{width:min(1100px,92%);margin:auto}
-.top{background:#0b1421;color:#ddd;padding:7px 0;font-size:12px}.nav{position:sticky;top:0;background:#101b2bf5;color:white;z-index:5;padding:14px 4%;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:19px;font-weight:800}.brand small{display:block;font-size:10px;color:#c5cbd3}.navlinks{display:flex;gap:18px;font-size:13px}.btn,.tab,.lesson-card a,.navbtn{border:0;border-radius:9px;padding:9px 16px;background:var(--g);color:var(--n);font-weight:800;cursor:pointer;display:inline-block}
-.hero{background:radial-gradient(circle at 15% 20%,#c8a96b30,transparent 30%),linear-gradient(120deg,var(--n),var(--n2));color:white;padding:75px 0}.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.5}.hero h1 span{color:var(--g)}.hero p{color:#d2d9e2;max-width:650px}
-section{padding:60px 0}.head{text-align:center;margin:0 auto 30px;max-width:700px}.head h2{color:var(--n);margin:4px}.head p{color:var(--muted);font-size:14px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:white;border:1px solid #e8e0d2;border-radius:15px;padding:22px}.card p{font-size:13px;color:var(--muted)}.muted{color:var(--muted)}.lessons{background:#f0ede6}.tabs{display:flex;justify-content:center;gap:8px;margin:20px;flex-wrap:wrap}.tab{background:white;border:1px solid #ddd}.tab.active{background:var(--n);color:white}.search{text-align:center;margin:18px}.search input{width:min(450px,100%);padding:12px;border:1px solid #ddd;border-radius:9px}.lesson-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.lesson-card{background:white;border:1px solid #e8e0d2;border-radius:12px;padding:17px;display:flex;justify-content:space-between;align-items:center;gap:12px}.lesson-card h3{font-size:15px;margin:0}.lesson-card p{font-size:11px;color:var(--muted);margin:3px 0}.lesson-card a{font-size:12px;white-space:nowrap;background:#f5eddd}
-.quiz{background:var(--n);color:white}.quiz .head h2{color:white}.quiz .head p{color:#ccd4de}.quizbox{background:white;color:var(--ink);max-width:700px;margin:auto;padding:24px;border-radius:15px}.answers{display:grid;gap:9px}.answer{padding:12px;border:1px solid #ddd;background:white;text-align:right;border-radius:8px;cursor:pointer}.correct{background:#e7f5eb;border-color:#4b8a67}.wrong{background:#fff0ee;border-color:#c26a63}
-.contactbox{background:linear-gradient(120deg,#14243a,#1d3550);color:white;border-radius:18px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:20px}.contactbox a{display:block;border:1px solid #e4cf9d66;border-radius:9px;padding:10px;color:#f4e7c8}
-footer{background:#0b1421;color:#bbc4cf;padding:20px;font-size:12px}.lessonpage{display:none}.lessonhero{background:linear-gradient(120deg,var(--n),var(--n2));color:white;padding:35px 0}.lessonhero h1{font-size:clamp(25px,4vw,40px)}.lessonhero p{color:#d2d9e2}
-.lessonwrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;padding-top:25px;padding-bottom:40px}.content{background:white;border-radius:15px;padding:clamp(18px,4vw,40px);box-shadow:0 8px 30px #101b2b0c}.content h2{color:#98743a;border-bottom:1px solid #eee4d1;padding-bottom:7px;margin-top:30px}.content h3{color:var(--n)}.content p,.content li{font-size:15px;line-height:2.3}.example{background:#f7f2e8;border-right:4px solid #c8a96b;padding:15px 18px;border-radius:9px;margin:15px 0}.note{background:#eef3f7;border-right:4px solid #496783;padding:13px;border-radius:8px}.sidebar{position:sticky;top:85px;background:white;border:1px solid #e8e0d2;border-radius:12px;padding:15px;height:max-content}.sidebar a{display:block;font-size:12px;color:#657080;padding:4px}.lessonnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-bottom:35px}.lessonnav a{background:var(--g);padding:8px 13px;border-radius:8px;font-size:12px;font-weight:800}
-@media(max-width:800px){.navlinks{display:none}.cards,.contactbox,.lessonwrap{grid-template-columns:1fr}.lesson-list{grid-template-columns:1fr}.sidebar{position:static;order:-1}.hero{padding:45px 0}}
-@media print{.nav,.top,.sidebar,footer,.lessonnav{display:none}.lessonwrap{display:block}.content{box-shadow:none}}
-</style></head><body>
-<div class="top"><div class="wrap">آموزش مفهومی شیمی <span style="float:left">دهم، یازدهم و دوازدهم</span></div></div>
-<header class="nav"><a class="brand" href="index.html">شیمی یلمه <small>آموزش شیمی عبدالرشید یلمه</small></a><nav class="navlinks"><a href="#home">خانه</a><a href="#courses">پایه‌ها</a><a href="#lessons">درسنامه‌ها</a><a href="#quiz">آزمون</a><a href="#contact">ارتباط</a></nav><a class="btn" href="#lessons">شروع یادگیری</a></header>
-<main id="homePage">
-<section class="hero" id="home"><div class="wrap"><div style="color:var(--g)">دانش، دقت، درک عمیق‌تر</div><h1>شیمی را <span>مفهومی</span> یاد بگیر؛<br>با اطمینان پیش برو.</h1><p>درسنامه‌های مرحله‌به‌مرحله، مثال‌های حل‌شده، نکات امتحانی و تمرین‌های پاسخ‌دار برای سه پایه دبیرستان.</p><a class="btn" href="#lessons">مشاهده درسنامه‌ها</a></div></section>
-<section id="courses"><div class="wrap"><div class="head"><h2>پایه تحصیلی خودت را انتخاب کن</h2><p>برای دیدن درس‌های هر پایه روی گزینه مربوط کلیک کن.</p></div><div class="cards">
-<article class="card"><h3>شیمی دهم</h3><p>اتم، ایزوتوپ، جدول دوره‌ای، پیوندها و واکنش‌ها.</p><a href="#lessons" data-jump="10">درس‌های دهم ←</a></article>
-<article class="card"><h3>شیمی یازدهم</h3><p>ساختار مولکول، نیروهای بین‌مولکولی، محلول و سرعت واکنش.</p><a href="#lessons" data-jump="11">درس‌های یازدهم ←</a></article>
-<article class="card"><h3>شیمی دوازدهم</h3><p>ترموشیمی، اکسایش و کاهش، الکتروشیمی، اسید و باز و تعادل.</p><a href="#lessons" data-jump="12">درس‌های دوازدهم ←</a></article>
-</div></div></section>
-<section class="lessons" id="lessons"><div class="wrap"><div class="head"><h2>کتابخانه درسنامه‌ها</h2><p>پایه را انتخاب کن و روی «مطالعه کامل» بزن تا صفحه اختصاصی درس باز شود.</p></div>
-<div class="tabs"><button class="tab active" data-grade="10">دهم</button><button class="tab" data-grade="11">یازدهم</button><button class="tab" data-grade="12">دوازدهم</button></div><div class="search"><input id="search" placeholder="جست‌وجوی عنوان درس..."></div><div class="lesson-list" id="lessonList"></div></div></section>
-<section id="quiz" class="quiz"><div class="wrap"><div class="head"><h2>آزمون کوتاه شیمی</h2><p>پاسخ درست را انتخاب کن و بازخورد بگیر.</p></div><div class="quizbox"><div id="qcount"></div><h3 id="qtext"></h3><div class="answers" id="answers"></div><p id="feedback" class="muted">یک گزینه را انتخاب کن.</p><button class="btn" id="next">پرسش بعدی</button></div></div></section>
-<section id="contact"><div class="wrap"><div class="contactbox"><div><h2>ارتباط با ما</h2><p>برای دریافت اطلاعات بیشتر درباره آموزش شیمی و کلاس‌ها با مدرس در ارتباط باشید.</p></div><div><a href="tel:09399044705">شماره تماس: ۰۹۳۹۹۰۴۴۷۰۵</a><p>مدرس شیمی: عبدالرشید یلمه</p></div></div></div></section>
-</main>
-<main class="lessonpage" id="lessonPage"><div class="lessonhero"><div class="wrap"><div id="gradeTitle" style="color:var(--g)"></div><h1 id="lessonTitle"></h1><p id="lessonIntro"></p></div></div><div class="wrap lessonwrap"><article class="content" id="lessonContent"></article><aside class="sidebar"><b>فهرست درس</b><a href="#explain">آموزش مفهومی</a><a href="#examples">مثال‌های حل‌شده</a><a href="#tips">نکات امتحانی</a><a href="#practice">تمرین‌ها</a><p><button class="btn" onclick="print()">چاپ درسنامه</button></p></aside></div><div class="wrap lessonnav"><a href="index.html#lessons">← بازگشت به درس‌ها</a><a id="prev" href="#">درس قبلی</a><a id="nextLesson" href="#">درس بعدی ←</a></div></main>
-<footer><div class="wrap">© شیمی یلمه | آموزش شیمی عبدالرشید یلمه <span style="float:left">یادگیری عمیق، پیشرفت ماندگار</span></div></footer>
-<script>
-const make=(title,intro,topics,examples,practice)=>({title,intro,topics,examples,practice});
-const db={
-"10":[
-make("ساختار اتم و ذره‌های زیراتمی","شناخت اجزای اتم، عدد اتمی، عدد جرمی و محاسبه پروتون، نوترون و الکترون.",[
-["اتم چیست؟","اتم کوچک‌ترین واحد یک عنصر است که ویژگی‌های شیمیایی آن را حفظ می‌کند. اتم از هسته و الکترون‌های پیرامون آن تشکیل شده است. هسته شامل پروتون و نوترون است و تقریباً تمام جرم اتم در هسته قرار دارد."],
-["ذره‌های زیراتمی","پروتون بار مثبت، الکترون بار منفی و نوترون بار الکتریکی صفر دارد. جرم پروتون و نوترون تقریباً یکای جرم اتمی است؛ جرم الکترون بسیار کمتر است."],
-["عدد اتمی و عدد جرمی","عدد اتمی Z برابر تعداد پروتون‌هاست. عدد جرمی A برابر مجموع پروتون‌ها و نوترون‌هاست؛ بنابراین تعداد نوترون N=A−Z خواهد بود."],
-["اتم خنثی و یون","در اتم خنثی تعداد پروتون و الکترون برابر است. از دست دادن الکترون، کاتیون مثبت و گرفتن الکترون، آنیون منفی می‌سازد. در یونش تعداد پروتون تغییر نمی‌کند."]
-],[["مثال ۱","اتمی با Z=11 و A=23 دارد: پروتون=۱۱، الکترون=۱۱ (اتم خنثی)، نوترون=۲۳−۱۱=۱۲."],["مثال ۲","یون Mg²⁺ عدد اتمی ۱۲ دارد. ۱۲ پروتون دارد و چون دو الکترون از دست داده، ۱۰ الکترون دارد."],["مثال ۳","Cl⁻ از گرفتن یک الکترون توسط کلر ساخته می‌شود؛ اگر Z=17 باشد، ۱۷ پروتون و ۱۸ الکترون دارد."]],["اتمی با Z=8 و A=16 چند نوترون دارد؟ پاسخ: ۸.","یون Al³⁺ با Z=13 چند الکترون دارد؟ پاسخ: ۱۰."]),
-make("ایزوتوپ‌ها و جرم اتمی میانگین","تفاوت ایزوتوپ‌ها و محاسبه میانگین وزنی جرم ایزوتوپ‌ها.",[
-["تعریف ایزوتوپ","ایزوتوپ‌های یک عنصر تعداد پروتون یکسان، اما تعداد نوترون متفاوت دارند؛ پس عدد اتمی یکسان و عدد جرمی متفاوت دارند."],
-["ویژگی ایزوتوپ‌ها","چون آرایش الکترونی ایزوتوپ‌های خنثی یک عنصر مشابه است، خواص شیمیایی آن‌ها بسیار نزدیک است؛ اما جرم و برخی ویژگی‌های هسته‌ای تفاوت دارد."],
-["جرم اتمی میانگین","جرم اتمی جدول دوره‌ای معمولاً میانگین وزنی جرم ایزوتوپ‌های طبیعی است. جرم هر ایزوتوپ در فراوانی اعشاری آن ضرب و حاصل‌ها جمع می‌شود."]
-],[["مثال ۱","کربن-۱۴ با عدد اتمی ۶، تعداد نوترون ۱۴−۶=۸ دارد."],["مثال ۲","جرم ایزوتوپ‌ها ۱۰ و ۱۱ و فراوانی آن‌ها ۷۵٪ و ۲۵٪ است: میانگین=(۱۰×۰٫۷۵)+(۱۱×۰٫۲۵)=۱۰٫۲۵ u."],["مثال ۳","اگر فراوانی دو ایزوتوپ ۰٫۶ و ۰٫۴ باشد، مجموع فراوانی‌ها ۱ یا ۱۰۰٪ است."]],["جرم‌های ۲۰ و ۲۲ با فراوانی ۹۰٪ و ۱۰٪: پاسخ ۲۰٫۲ u.","چرا ایزوتوپ‌ها یک خانه جدول دارند؟ پاسخ: عدد اتمی و تعداد پروتون یکسان دارند."]),
-make("جدول دوره‌ای عنصرها","دوره، گروه، فلز و نافلز و روندهای تناوبی.",[
-["ساختار جدول","عنصرها بر اساس افزایش عدد اتمی مرتب شده‌اند. ردیف افقی دوره و ستون عمودی گروه است."],
-["گروه و الکترون ظرفیتی","عنصرهای یک گروه اصلی معمولاً تعداد الکترون ظرفیتی مشابه و رفتار شیمیایی نزدیک دارند."],
-["دسته‌بندی عنصرها","بیشتر فلزها در چپ و مرکز جدول، نافلزها در سمت راست و شبه‌فلزها در مرز میان این دو قرار دارند."],
-["روندهای تناوبی","شعاع اتمی در یک دوره از چپ به راست معمولاً کاهش و در یک گروه از بالا به پایین افزایش می‌یابد. انرژی یونش و الکترونگاتیوی نیز روندهای مشخصی دارند."]
-],[["سدیم","سدیم در گروه ۱ یک الکترون ظرفیتی دارد و معمولاً Na⁺ می‌سازد."],["منیزیم","منیزیم در گروه ۲ دو الکترون ظرفیتی دارد و معمولاً Mg²⁺ می‌سازد."],["کلر","کلر در گروه ۱۷ معمولاً یک الکترون می‌گیرد و Cl⁻ تشکیل می‌دهد."]],["عنصرهای یک گروه چه شباهتی دارند؟ پاسخ: الکترون ظرفیتی مشابه.","شعاع اتمی در یک دوره از چپ به راست؟ پاسخ: معمولاً کاهش می‌یابد."]),
-make("پیوند یونی و ترکیب‌های یونی","تشکیل یون و نوشتن فرمول ترکیب‌های یونی.",[
-["تشکیل یون","اتم با از دست دادن الکترون کاتیون و با گرفتن الکترون آنیون می‌شود."],
-["پیوند یونی","جاذبه الکتریکی میان یون‌های ناهم‌نام پیوند یونی نام دارد. مجموع بارهای ترکیب یونی خنثی است."],
-["فرمول‌نویسی","نسبت یون‌ها باید طوری باشد که مجموع بار مثبت و منفی صفر شود؛ نسبت را به ساده‌ترین عدد صحیح می‌نویسیم."],
-["ویژگی‌ها","ترکیب‌های یونی اغلب جامد بلوری و دارای نقطه ذوب بالا هستند. در حالت مذاب یا محلول آبی می‌توانند جریان برق را عبور دهند."]
-],[["MgCl₂","Mg²⁺ به دو Cl⁻ نیاز دارد؛ پس فرمول MgCl₂ است."],["Al₂O₃","دو Al³⁺ بار +۶ و سه O²⁻ بار −۶ می‌دهند؛ فرمول Al₂O₃ است."],["CaF₂","یک Ca²⁺ با دو F⁻ ترکیب می‌شود؛ فرمول CaF₂ است."]],["فرمول ترکیب سدیم و اکسیژن؟ پاسخ: Na₂O.","فرمول ترکیب کلسیم و فلوئور؟ پاسخ: CaF₂."]),
-make("پیوند کووالانسی و ساختار لوویس","اشتراک الکترون‌ها و نمایش پیوندهای یگانه، دوگانه و سه‌گانه.",[
-["پیوند کووالانسی","در ترکیب‌های نافلزی، اتم‌ها یک یا چند جفت الکترون را به اشتراک می‌گذارند."],
-["پیوند چندگانه","اشتراک یک جفت، پیوند یگانه؛ دو جفت، پیوند دوگانه؛ سه جفت، پیوند سه‌گانه ایجاد می‌کند."],
-["ساختار لوویس","الکترون‌های ظرفیتی با نقطه و جفت‌های مشترک با خط نشان داده می‌شوند. هیدروژن به آرایش دوتایی و بسیاری از اتم‌های دوره دوم به آرایش هشت‌تایی تمایل دارند."],
-["روش رسم","الکترون‌های ظرفیتی را بشمارید، اتم مرکزی را انتخاب کنید، پیوندهای یگانه را رسم کنید و سپس الکترون‌های باقی‌مانده را جای دهید."]
-],[["H₂","دو اتم هیدروژن یک جفت الکترون را به اشتراک می‌گذارند: H—H."],["O₂","دو اتم اکسیژن دو جفت مشترک دارند: O=O."],["CO₂","ساختار اصلی مولکول O=C=O است؛ کربن با هر اکسیژن پیوند دوگانه دارد."]],["در N₂ چند جفت مشترک وجود دارد؟ پاسخ: سه جفت.","چرا هیدروژن دو الکترونی پایدار می‌شود؟ پاسخ: لایه اول حداکثر دو الکترون می‌پذیرد."]),
-make("واکنش شیمیایی و موازنه","معادله‌نویسی و قانون پایستگی جرم.",[
-["واکنش شیمیایی","در واکنش، آرایش اتم‌ها تغییر می‌کند و مواد تازه‌ای تشکیل می‌شوند. مواد آغازین واکنش‌دهنده و مواد حاصل فرآورده‌اند."],
-["معادله شیمیایی","واکنش‌دهنده‌ها سمت چپ و فرآورده‌ها سمت راست پیکان نوشته می‌شوند."],
-["پایستگی جرم","اتم‌ها در واکنش معمولی نابود یا خلق نمی‌شوند؛ تعداد اتم‌های هر عنصر در دو طرف معادله باید برابر باشد."],
-["موازنه","فقط ضریب جلوی فرمول را تغییر دهید؛ زیروند داخل فرمول را تغییر ندهید."]
-],[["تشکیل آب","H₂+O₂→H₂O؛ معادله موازنه‌شده: 2H₂+O₂→2H₂O."],["آمونیاک","N₂+H₂→NH₃؛ معادله موازنه‌شده: N₂+3H₂→2NH₃."],["سوختن متان","CH₄+O₂→CO₂+H₂O؛ معادله موازنه‌شده: CH₄+2O₂→CO₂+2H₂O."]],["Fe+O₂→Fe₂O₃ را موازنه کنید. پاسخ: 4Fe+3O₂→2Fe₂O₃.","چرا زیروند را عوض نمی‌کنیم؟ پاسخ: چون نوع ماده تغییر می‌کند."])
-],
-"11":[
-make("ساختار لوویس و شکل مولکول‌ها","پیش‌بینی شکل مولکول با توجه به ناحیه‌های الکترونی.",[
-["الکترون ظرفیتی","الکترون‌های لایه بیرونی در تشکیل پیوند نقش اصلی دارند."],
-["دافعه ناحیه‌های الکترونی","ناحیه‌های الکترونی اطراف اتم مرکزی طوری قرار می‌گیرند که دافعه آن‌ها کمینه شود."],
-["شکل مولکول","جفت‌الکترون‌های ناپیوندی در شکل مولکولی دیده نمی‌شوند، اما زاویه پیوندها را تغییر می‌دهند."],
-["قطبیت","برای تعیین قطبیت مولکول باید قطبیت پیوندها و شکل هندسی را با هم بررسی کرد."]
-],[["CH₄","کربن چهار پیوند و بدون جفت ناپیوندی دارد؛ شکل چهاروجهی است."],["NH₃","نیتروژن سه پیوند و یک جفت ناپیوندی دارد؛ شکل هرمی سه‌وجهی است."],["H₂O","اکسیژن دو پیوند و دو جفت ناپیوندی دارد؛ شکل خمیده است."]],["شکل CO₂ چیست؟ پاسخ: خطی.","آیا هر مولکول دارای پیوند قطبی، قطبی است؟ پاسخ: خیر؛ تقارن ممکن است دوقطبی‌ها را خنثی کند."]),
-make("نیروهای بین‌مولکولی","نیروهای لاندن، دوقطبی ـ دوقطبی و پیوند هیدروژنی.",[
-["تفاوت پیوند و نیرو","پیوند درون‌مولکولی اتم‌ها را به هم متصل می‌کند؛ نیروی بین‌مولکولی میان مولکول‌ها اثر می‌کند."],
-["لاندن","از دوقطبی‌های لحظه‌ای ناشی می‌شود و در همه ذره‌ها وجود دارد."],
-["دوقطبی ـ دوقطبی","میان مولکول‌های قطبی، بخش مثبت نسبی یک مولکول به بخش منفی نسبی مولکول دیگر جذب می‌شود."],
-["پیوند هیدروژنی","وقتی H به F یا O یا N متصل باشد، می‌تواند با جفت‌الکترون این اتم‌ها در مولکول دیگر جاذبه ویژه‌ای ایجاد کند."]
-],[["آب","پیوند هیدروژنی میان مولکول‌های آب در نقطه جوش نسبتاً بالای آن نقش دارد."],["متان","متان ناقطبی است و نیروهای لاندن مهم‌ترین جاذبه بین‌مولکولی آن‌اند."],["HCl","مولکول قطبی HCl علاوه بر لاندن، جاذبه دوقطبی ـ دوقطبی دارد."]],["کدام نیرو در همه مولکول‌ها هست؟ پاسخ: لاندن.","چرا آب نقطه جوش نسبتاً بالایی دارد؟ پاسخ: پیوند هیدروژنی."]),
-make("محلول‌ها و غلظت مولی","حلال، حل‌شونده، مولاریته و رقیق‌سازی.",[
-["محلول","محلول مخلوط همگن است. حلال ماده‌ای است که حل‌شونده را در خود پخش می‌کند."],
-["غلظت مولی","مولاریته تعداد مول حل‌شونده در هر لیتر محلول است؛ واحد mol/L یا M دارد."],
-["رابطه","M=n/V؛ حجم باید بر حسب لیتر و حجم نهایی محلول باشد."],
-["رقیق‌سازی","در رقیق‌سازی مقدار مول حل‌شونده ثابت است؛ پس M₁V₁=M₂V₂."]
-],[["مولاریته","۰٫۵ مول در ۲ لیتر: M=۰٫۵÷۲=۰٫۲۵ مولار."],["تبدیل حجم","۲۵۰ میلی‌لیتر=۰٫۲۵ لیتر؛ اگر ۰٫۱ مول ماده باشد، M=۰٫۴ M."],["رقیق‌سازی","۱۰۰ mL محلول ۲ M تا ۴۰۰ mL رقیق شود: M₂=(۲×۱۰۰)÷۴۰۰=۰٫۵ M."]],["۰٫۲ مول در ۵۰۰ میلی‌لیتر چند مولار است؟ پاسخ: ۰٫۴ M.","در رقیق‌سازی تعداد مول حل‌شونده چه می‌شود؟ پاسخ: ثابت می‌ماند."]),
-make("سرعت واکنش شیمیایی","برخورد مؤثر، انرژی فعال‌سازی و عوامل مؤثر بر سرعت.",[
-["سرعت واکنش","میزان تغییر غلظت واکنش‌دهنده یا فرآورده در واحد زمان است."],
-["نظریه برخورد","ذره‌ها باید برخورد کنند؛ برخورد مؤثر انرژی کافی و آرایش مناسب دارد."],
-["انرژی فعال‌سازی","حداقل انرژی لازم برای رسیدن واکنش‌دهنده‌ها به حالت گذار است. کاتالیزگر مسیر کم‌انرژی‌تری فراهم می‌کند."],
-["عوامل مؤثر","افزایش دما، غلظت و سطح تماس و استفاده از کاتالیزگر معمولاً سرعت را افزایش می‌دهد."]
-],[["پودر جامد","پودر سطح تماس بیشتری از قطعه بزرگ دارد و معمولاً سریع‌تر واکنش می‌دهد."],["دما","افزایش دما انرژی جنبشی را بالا می‌برد و برخوردهای مؤثر را بیشتر می‌کند."],["کاتالیزگر","انرژی فعال‌سازی را کاهش می‌دهد و سرعت را زیاد می‌کند؛ جایگاه تعادل را تغییر نمی‌دهد."]],["چرا افزایش سطح تماس سرعت را بالا می‌برد؟ پاسخ: برخوردهای بیشتری رخ می‌دهد.","کاتالیزگر چه اثری دارد؟ پاسخ: کاهش انرژی فعال‌سازی."]),
-make("گرماشیمی و آنتالپی","واکنش گرماده، گرماگیر و محاسبه تغییر آنتالپی.",[
-["انرژی پیوند","شکستن پیوند انرژی می‌گیرد و تشکیل پیوند انرژی آزاد می‌کند."],
-["آنتالپی","ΔH برابر آنتالپی فرآورده‌ها منهای آنتالپی واکنش‌دهنده‌هاست."],
-["گرماده و گرماگیر","در واکنش گرماده ΔH منفی و در واکنش گرماگیر ΔH مثبت است."],
-["انرژی پیوند","ΔH تقریبی برابر مجموع انرژی پیوندهای شکسته‌شده منهای مجموع انرژی پیوندهای تشکیل‌شده است."]
-],[["علامت","اگر ΔH=−۱۲۰ kJ باشد واکنش گرماده است."],["انرژی پیوند","شکستن ۵۰۰ و تشکیل ۶۵۰ kJ: ΔH≈۵۰۰−۶۵۰=−۱۵۰ kJ."],["آنتالپی","فرآورده‌ها ۲۰۰ و واکنش‌دهنده‌ها ۸۰ kJ: ΔH=+۱۲۰ kJ و واکنش گرماگیر است."]],["ΔH مثبت چه معنایی دارد؟ پاسخ: گرماگیر.","چرا انرژی پیوند تشکیل‌شده کم می‌شود؟ پاسخ: تشکیل پیوند انرژی آزاد می‌کند."]),
-make("شیمی و سلامت","مواد شیمیایی در بدن، دارو، آب و مواد غذایی.",[
-["شیمی در زندگی","مواد شیمیایی در غذا، دارو، شوینده‌ها و آب حضور دارند. شناخت ویژگی آن‌ها استفاده آگاهانه را ممکن می‌کند."],
-["یون‌های بدن","سدیم، پتاسیم، کلسیم و کلرید در فرایندهای زیستی نقش دارند و تعادل آن‌ها مهم است."],
-["داروها","اثر دارو به ساختار، مقدار مصرف، روش مصرف و شرایط بدن وابسته است؛ مصرف باید طبق نظر متخصص باشد."],
-["آب سالم","شفاف بودن آب به تنهایی سلامت آن را تضمین نمی‌کند؛ آلودگی‌های شیمیایی و میکروبی ممکن است دیده نشوند."]
-],[["نمک","سدیم کلرید از Na⁺ و Cl⁻ تشکیل شده؛ سدیم در انتقال پیام عصبی نقش دارد، اما مصرف زیاد نمک مناسب نیست."],["آهن","آهن در هموگلوبین نقش دارد و به انتقال اکسیژن کمک می‌کند."],["شوینده","مواد فعال سطحی به جدا شدن چربی از سطح کمک می‌کنند؛ مواد شوینده را بی‌دلیل با هم مخلوط نکنید."]],["چرا شفافیت آب کافی نیست؟ پاسخ: آلاینده نامرئی هم ممکن است داشته باشد.","چرا مقدار مواد معدنی مهم است؟ پاسخ: بدن به تعادل نیاز دارد."])
-],
-"12":[
-make("مولکول‌ها، قطبیت و برهم‌کنش‌ها","رابطه ساختار مولکولی و قطبیت با خواص مواد.",[
-["قطبیت پیوند","اگر الکترون‌های پیوندی نابرابر توزیع شوند، پیوند قطبی است."],
-["قطبیت مولکول","قطبیت کل مولکول به قطبیت پیوندها و شکل هندسی آن بستگی دارد."],
-["نیروهای بین‌مولکولی","لاندن در همه ذره‌ها وجود دارد؛ مولکول قطبی جاذبه دوقطبی ـ دوقطبی هم دارد و گاهی پیوند هیدروژنی تشکیل می‌شود."],
-["خواص فیزیکی","جاذبه بین‌مولکولی بر نقطه جوش، فراریت، گرانروی و انحلال‌پذیری اثر می‌گذارد."]
-],[["آب","پیوند O—H قطبی و شکل آب خمیده است؛ دوقطبی‌ها خنثی نمی‌شوند، پس آب قطبی است."],["CO₂","پیوندهای C=O قطبی‌اند، اما مولکول خطی و متقارن است؛ مولکول ناقطبی است."],["متان","ساختار چهاروجهی متقارن باعث خنثی شدن اثر دوقطبی پیوندها می‌شود."]],["چرا CO₂ ناقطبی است؟ پاسخ: دوقطبی‌ها در ساختار خطی خنثی می‌شوند.","کدام نیرو در همه مولکول‌ها هست؟ پاسخ: لاندن."]),
-make("ترموشیمی و محاسبات انرژی","آنتالپی تشکیل، قانون هس و انرژی پیوند.",[
-["تغییر آنتالپی","در فشار ثابت گرمای مبادله‌شده با تغییر آنتالپی برابر است."],
-["آنتالپی تشکیل","تغییر آنتالپی تشکیل یک مول ماده از عنصرهای سازنده در حالت استاندارد است. آنتالپی تشکیل عنصر در حالت استاندارد صفر است."],
-["قانون هس","تغییر آنتالپی واکنش کلی برابر مجموع تغییر آنتالپی مرحله‌هاست؛ مسیر انجام واکنش اهمیتی ندارد."],
-["انرژی پیوند","برای تخمین ΔH، انرژی پیوندهای شکسته‌شده منهای انرژی پیوندهای تشکیل‌شده محاسبه می‌شود."]
-],[["علامت","ΔH=+۷۵ kJ یعنی واکنش گرماگیر است."],["انرژی پیوند","شکستن ۴۲۰ و تشکیل ۵۱۰ kJ: ΔH≈−۹۰ kJ."],["قانون هس","اگر دو مرحله به ترتیب −۳۰ و +۱۰ kJ باشند، ΔH کل برابر −۲۰ kJ است."]],["دو مرحله +۲۵ و −۶۰؛ ΔH کل؟ پاسخ: −۳۵ kJ.","آنتالپی تشکیل عنصر در حالت استاندارد؟ پاسخ: صفر."]),
-make("اکسایش و کاهش","انتقال الکترون، عدد اکسایش، عامل اکسنده و نیم‌واکنش.",[
-["اکسایش و کاهش","اکسایش از دست دادن الکترون و کاهش گرفتن الکترون است؛ این دو هم‌زمان رخ می‌دهند."],
-["عدد اکسایش","افزایش عدد اکسایش نشانه اکسایش و کاهش عدد اکسایش نشانه کاهش است."],
-["عامل‌ها","عامل اکسنده الکترون می‌گیرد و خودش کاهش می‌یابد؛ عامل کاهنده الکترون می‌دهد و خودش اکسایش می‌یابد."],
-["نیم‌واکنش","در نوشتن نیم‌واکنش‌ها باید هم تعداد اتم‌ها و هم بار الکتریکی موازنه شود."]
-],[["روی و مس","Zn+Cu²⁺→Zn²⁺+Cu؛ روی اکسایش و یون مس کاهش می‌یابد."],["عامل‌ها","در واکنش بالا Zn عامل کاهنده و Cu²⁺ عامل اکسنده است."],["نیم‌واکنش","Zn→Zn²⁺+2e⁻ و Cu²⁺+2e⁻→Cu؛ با جمع، الکترون‌ها حذف می‌شوند."]],["در کاهش عدد اکسایش چه می‌شود؟ پاسخ: کاهش می‌یابد و گونه الکترون می‌گیرد.","عامل اکسنده چه می‌شود؟ پاسخ: خودش کاهش می‌یابد."]),
-make("سلول‌های الکتروشیمیایی","سلول گالوانی، آند، کاتد و حرکت الکترون‌ها.",[
-["سلول گالوانی","واکنش اکسایش ـ کاهش خودبه‌خودی انرژی شیمیایی را به انرژی الکتریکی تبدیل می‌کند."],
-["آند و کاتد","اکسایش همیشه در آند و کاهش همیشه در کاتد رخ می‌دهد. در سلول گالوانی آند منفی و کاتد مثبت است."],
-["الکترون و پل نمکی","الکترون‌ها از آند به کاتد می‌روند. پل نمکی با حرکت یون‌ها از انباشته شدن بار جلوگیری می‌کند."],
-["پتانسیل سلول","E°cell=E°cathode−E°anode. مثبت بودن آن نشان‌دهنده خودبه‌خودی بودن واکنش سلول گالوانی در شرایط استاندارد است."]
-],[["روی ـ مس","روی در آند اکسایش می‌یابد و یون مس در کاتد کاهش می‌یابد."],["جهت الکترون","در سلول روی ـ مس، الکترون از الکترود روی به الکترود مس می‌رود."],["محاسبه","اگر پتانسیل کاهش کاتد +۰٫۳۴ و آند −۰٫۷۶ ولت باشد، E°cell=۱٫۱۰ V است."]],["اکسایش در کدام الکترود است؟ پاسخ: آند.","پتانسیل مثبت سلول گالوانی چه مفهومی دارد؟ پاسخ: واکنش خودبه‌خودی است."]),
-make("اسیدها، بازها و pH","تعریف برونستد، مقیاس pH و خنثی‌سازی.",[
-["تعریف برونستد","اسید دهنده پروتون و باز گیرنده پروتون است."],
-["یون‌های آب","اسیدها می‌توانند غلظت H₃O⁺ و بازها غلظت OH⁻ را افزایش دهند."],
-["مقیاس pH","در شرایط معمول، pH کمتر از ۷ اسیدی، ۷ خنثی و بیشتر از ۷ بازی است. مقیاس pH لگاریتمی است."],
-["خنثی‌سازی","در واکنش اسید و باز معمولاً نمک و آب تولید می‌شود."]
-],[["مقایسه","pH=2 نسبت به pH=4 صد برابر غلظت H₃O⁺ بیشتری دارد."],["خنثی‌سازی","HCl+NaOH→NaCl+H₂O."],["مزدوج","در NH₃+H₂O⇌NH₄⁺+OH⁻، آمونیاک پروتون می‌گیرد و باز است."]],["pH=9 در شرایط معمول چه نوع محلولی است؟ پاسخ: بازی.","باز برونستد چه می‌کند؟ پاسخ: پروتون می‌گیرد."]),
-make("تعادل شیمیایی","تعادل پویا، ثابت تعادل و اصل لوشاتلیه.",[
-["تعادل پویا","در تعادل سرعت واکنش رفت و برگشت برابر است؛ غلظت‌ها ثابت‌اند، اما لزوماً برابر نیستند."],
-["ثابت تعادل","برای aA+bB⇌cC+dD، Kc=[C]^c[D]^d/[A]^a[B]^b است. جامد خالص و مایع خالص در رابطه وارد نمی‌شوند."],
-["تفسیر K","K بزرگ یعنی فرآورده‌ها در تعادل غالب‌اند؛ K کوچک یعنی واکنش‌دهنده‌ها غالب‌اند. مقدار K فقط با تغییر دما عوض می‌شود."],
-["اصل لوشاتلیه","سامانه در برابر تغییر غلظت، فشار یا دما جهتی را ترجیح می‌دهد که اثر تغییر را کاهش دهد. کاتالیزگر فقط رسیدن به تعادل را سریع‌تر می‌کند."]
-],[["افزایش واکنش‌دهنده","در A+B⇌C با افزودن A، تعادل به سمت راست و مصرف A جابه‌جا می‌شود."],["برداشتن فرآورده","با خارج کردن C، تعادل به سمت راست جابه‌جا می‌شود تا C بیشتری تولید شود."],["اثر دما","در واکنش گرماده، افزایش دما تعادل را به سمت واکنش‌دهنده‌ها می‌برد."]],["آیا غلظت‌ها در تعادل برابرند؟ پاسخ: خیر؛ سرعت رفت و برگشت برابر است.","آیا کاتالیزگر K را تغییر می‌دهد؟ پاسخ: خیر."])
-]};
-let grade="10";
-function render(){let term=document.getElementById("search").value.toLowerCase();let arr=db[grade].map((x,i)=>({...x,i})).filter(x=>(x.title+x.intro).toLowerCase().includes(term));document.getElementById("lessonList").innerHTML=arr.map(x=>`<article class="lesson-card"><div><h3>${x.title}</h3><p>${x.intro}</p></div><a href="?lesson=${grade}-${x.i+1}">مطالعه کامل ←</a></article>`).join("")||"<p>درسی پیدا نشد.</p>";}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{grade=b.dataset.grade;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));render()});
-document.querySelectorAll("[data-jump]").forEach(a=>a.onclick=()=>{grade=a.dataset.jump;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.grade===grade));render()});
-document.getElementById("search").oninput=render;render();
-function openLesson(){let id=new URLSearchParams(location.search).get("lesson");if(!id)return;let [g,n]=id.split("-"),i=+n-1,d=db[g]?.[i];if(!d)return;
-document.getElementById("homePage").style.display="none";document.getElementById("lessonPage").style.display="block";document.getElementById("gradeTitle").textContent="پایه "+({"10":"دهم","11":"یازدهم","12":"دوازدهم"}[g])+" | درس "+n;document.getElementById("lessonTitle").textContent=d.title;document.getElementById("lessonIntro").textContent=d.intro;document.title=d.title+" | شیمی یلمه";
-let h='<p class="note"><b>هدف درس:</b> ابتدا مفهوم را بخوان، سپس مثال‌ها را خودت حل کن و در پایان تمرین‌ها را پاسخ بده.</p><h2 id="explain">آموزش مفهومی</h2>';d.topics.forEach((t,j)=>h+=`<h3>${j+1}. ${t[0]}</h3><p>${t[1]}</p>`);h+='<h2 id="examples">مثال‌های حل‌شده</h2>';d.examples.forEach((e,j)=>h+=`<div class="example"><b>${e[0]}</b><p>${e[1]}</p></div>`);h+='<h2 id="tips">نکات امتحانی</h2><div class="note"><ul><li>داده‌ها و خواسته مسئله را جداگانه بنویس.</li><li>واحدها را کنترل کن و در صورت نیاز تبدیل واحد انجام بده.</li><li>فرمول را قبل از جای‌گذاری عددها بنویس.</li><li>در پایان، پاسخ را از نظر مفهوم و واحد بررسی کن.</li></ul></div><h2 id="practice">تمرین‌های پایان درس</h2>';d.practice.forEach((p,j)=>{let z=p.split(" پاسخ:");h+=`<details class="example"><summary><b>تمرین ${j+1}: ${z[0]}</b></summary><p><b>پاسخ:</b>${z[1]||" پاسخ را با توجه به متن درس بررسی کن."}</p></details>`});h+='<p class="note"><b>روش مطالعه:</b> نکته‌های مهم را خلاصه‌نویسی کن و مثال‌ها را یک بار دیگر بدون نگاه به پاسخ حل کن.</p>';document.getElementById("lessonContent").innerHTML=h;
-let pg=n==1?(g=="10"?"12":String(+g-1)):g,pi=n==1?db[pg].length:+n-1,ng=n==db[g].length?(g=="12"?"10":String(+g+1)):g,ni=n==db[g].length?1:+n+1;document.getElementById("prev").href=`?lesson=${pg}-${pi}`;document.getElementById("prev").textContent="← "+db[pg][pi-1].title;document.getElementById("nextLesson").href=`?lesson=${ng}-${ni}`;document.getElementById("nextLesson").textContent=db[ng][ni-1].title+" ←";scrollTo(0,0)}
-openLesson();
-const qs=[["کدام ذره بار منفی دارد؟",["پروتون","نوترون","الکترون","هسته"],2,"الکترون بار منفی دارد."],["عدد اتمی برابر چیست؟",["تعداد پروتون","تعداد نوترون","جرم اتم","تعداد لایه"],0,"عدد اتمی برابر تعداد پروتون‌هاست."],["در پیوند یونی چه رخ می‌دهد؟",["اشتراک الکترون","انتقال الکترون","اشتراک پروتون","تغییر هسته"],1,"در پیوند یونی انتقال الکترون رخ می‌دهد."],["کدام عامل سرعت واکنش را معمولاً افزایش می‌دهد؟",["کاهش دما","کاهش غلظت","افزایش دما","کاهش سطح تماس"],2,"افزایش دما برخوردهای مؤثر را بیشتر می‌کند."],["در تعادل شیمیایی چه چیزی برابر است؟",["غلظت‌ها","سرعت رفت و برگشت","جرم‌ها","تعداد اتم‌ها"],1,"سرعت واکنش رفت و برگشت برابر می‌شود."]];
-let qi=0,score=0,done=false,answered=false;function showQ(){answered=false;let q=qs[qi];document.getElementById("qcount").textContent=`پرسش ${qi+1} از ${qs.length}`;document.getElementById("qtext").textContent=q[0];document.getElementById("feedback").textContent="یک گزینه را انتخاب کن.";document.getElementById("next").textContent=qi==qs.length-1?"نمایش نتیجه":"پرسش بعدی";document.getElementById("answers").innerHTML=q[1].map((a,i)=>`<button class="answer" data-i="${i}">${"الف،ب،ج،د".split("،")[i]}) ${a}</button>`).join("");document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>{if(answered||done)return;answered=true;let x=+b.dataset.i;document.querySelectorAll(".answer").forEach((v,j)=>{if(j===q[2])v.classList.add("correct");if(j===x&&x!==q[2])v.classList.add("wrong")});if(x===q[2]){score++;document.getElementById("feedback").textContent="آفرین! "+q[3]}else document.getElementById("feedback").textContent="پاسخ درست نبود. "+q[3]})}
-document.getElementById("next").onclick=()=>{if(done){qi=0;score=0;done=false;showQ();return}if(!answered){document.getElementById("feedback").textContent="ابتدا یک گزینه انتخاب کن.";return}if(qi<qs.length-1){qi++;showQ()}else{done=true;document.getElementById("qtext").textContent=`آزمون تمام شد: ${score} پاسخ درست از ${qs.length}`;document.getElementById("answers").innerHTML="";document.getElementById("feedback").textContent="برای تکرار آزمون دکمه را بزن.";document.getElementById("next").textContent="شروع دوباره"}};showQ();
-</script></body></html>"""
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="آموزش شیمی دهم، یازدهم و دوازدهم با درسنامه، مثال و آزمون">
+<title>شیمی یلمه | آموزش شیمی عبدالرشید یلمه</title>
 
-p = Path("/mnt/data/shimi_yalmeh_complete.html")
-p.write_text(html, encoding="utf-8")
-print("فایل HTML کامل ساخته شد:", p.name, "| حجم:", len(html.encode("utf-8")), "بایت")
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary:#075985;
+  --secondary:#0e7490;
+  --accent:#06b6d4;
+  --dark:#0f172a;
+  --light:#f0f9ff;
+  --white:#ffffff;
+  --text:#334155;
+  --border:#dbeafe;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:'Vazirmatn',Tahoma,sans-serif;
+  background:#f8fafc;
+  color:var(--text);
+  line-height:2;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+a {
+  text-decoration:none;
+  color:inherit;
+}
+
+button {
+  font-family:inherit;
+  cursor:pointer;
+}
+
+header {
+  background:linear-gradient(135deg,#082f49,#075985,#0891b2);
+  color:white;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+  box-shadow:0 4px 18px #0002;
+}
+
+.logo {
+  font-size:23px;
+  font-weight:800;
+}
+
+.logo span {
+  display:block;
+  font-size:12px;
+  font-weight:400;
+  color:#bae6fd;
+}
+
+nav {
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+nav a {
+  color:white;
+  font-size:14px;
+}
+
+nav a:hover {
+  color:#67e8f9;
+}
+
+.hero {
+  background:linear-gradient(135deg,#0c4a6e,#0284c7);
+  color:white;
+  padding:85px 8%;
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:38px;
+  margin-bottom:15px;
+}
+
+.hero p {
+  max-width:700px;
+  margin:0 auto 25px;
+  color:#e0f2fe;
+}
+
+.btn {
+  display:inline-block;
+  background:#fff;
+  color:#075985;
+  padding:11px 25px;
+  border-radius:10px;
+  font-weight:700;
+  border:0;
+  margin:5px;
+}
+
+.btn-primary {
+  background:#0891b2;
+  color:white;
+}
+
+.btn:hover {
+  opacity:.85;
+  transform:translateY(-2px);
+}
+
+.container {
+  max-width:1150px;
+  margin:auto;
+  padding:55px 20px;
+}
+
+.section-title {
+  text-align:center;
+  color:#0c4a6e;
+  font-size:27px;
+  margin-bottom:12px;
+}
+
+.section-desc {
+  text-align:center;
+  color:#64748b;
+  margin-bottom:30px;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.card {
+  background:white;
+  padding:24px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 5px 18px #0f172a0a;
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 9px 25px #0f172a15;
+}
+
+.card h3 {
+  color:#075985;
+  margin-bottom:10px;
+}
+
+.grade-icon {
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.card p {
+  color:#64748b;
+  font-size:14px;
+}
+
+.lesson-list {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:15px;
+}
+
+.lesson-card {
+  background:white;
+  padding:18px;
+  border-radius:13px;
+  border:1px solid #dbeafe;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.lesson-card h3 {
+  color:#075985;
+  font-size:17px;
+}
+
+.lesson-card p {
+  font-size:13px;
+  color:#64748b;
+}
+
+.lesson-card button {
+  background:#e0f2fe;
+  color:#075985;
+  border:0;
+  border-radius:8px;
+  padding:9px;
+  font-weight:700;
+  margin-top:auto;
+}
+
+.lesson-card button:hover {
+  background:#bae6fd;
+}
+
+#lessonPage {
+  display:none;
+  max-width:950px;
+  margin:35px auto;
+  padding:25px;
+}
+
+.lesson-content {
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 5px 20px #00000008;
+}
+
+.lesson-content h1 {
+  color:#075985;
+  margin-bottom:15px;
+  font-size:27px;
+}
+
+.lesson-content h2 {
+  color:#0e7490;
+  margin:25px 0 10px;
+  font-size:21px;
+}
+
+.lesson-content p {
+  margin:10px 0;
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  padding-right:25px;
+  margin:10px 0;
+}
+
+.example {
+  background:#ecfeff;
+  border-right:5px solid #0891b2;
+  padding:17px;
+  border-radius:9px;
+  margin:18px 0;
+}
+
+.note {
+  background:#eff6ff;
+  border-right:5px solid #2563eb;
+  padding:15px;
+  border-radius:9px;
+  margin:18px 0;
+}
+
+.formula {
+  direction:ltr;
+  text-align:center;
+  font-family:Georgia,serif;
+  font-size:21px;
+  background:#f1f5f9;
+  padding:13px;
+  margin:12px 0;
+  border-radius:8px;
+  color:#0f172a;
+}
+
+.back-btn {
+  background:#075985;
+  color:white;
+  border:0;
+  padding:11px 20px;
+  border-radius:9px;
+  margin-bottom:20px;
+}
+
+.quiz-box {
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  border:1px solid var(--border);
+  max-width:750px;
+  margin:auto;
+}
+
+.question {
+  margin-bottom:25px;
+  padding-bottom:15px;
+  border-bottom:1px solid #e2e8f0;
+}
+
+.question label {
+  display:block;
+  padding:7px;
+  cursor:pointer;
+}
+
+.question input {
+  margin-left:8px;
+}
+
+#quizResult {
+  margin-top:20px;
+  font-weight:700;
+  color:#075985;
+  font-size:18px;
+}
+
+.contact {
+  background:#e0f2fe;
+  text-align:center;
+  padding:45px 20px;
+}
+
+footer {
+  background:#082f49;
+  color:#cbd5e1;
+  text-align:center;
+  padding:25px;
+  font-size:13px;
+}
+
+.hidden {
+  display:none !important;
+}
+
+@media(max-width:650px) {
+  header {
+    justify-content:center;
+    text-align:center;
+  }
+
+  nav {
+    justify-content:center;
+  }
+
+  .hero {
+    padding:55px 20px;
+  }
+
+  .hero h1 {
+    font-size:27px;
+  }
+
+  .container {
+    padding:38px 15px;
+  }
+
+  .lesson-content {
+    padding:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    شیمی یلمه
+    <span>آموزش شیمی عبدالرشید یلمه</span>
+  </div>
+
+  <nav>
+    <a href="#home">صفحه اصلی</a>
+    <a href="#grades">پایه‌های تحصیلی</a>
+    <a href="#lessons">درسنامه‌ها</a>
+    <a href="#quiz">آزمون</a>
+    <a href="#contact">تماس</a>
+  </nav>
+</header>
+
+<main id="mainPage">
+
+<section class="hero" id="home">
+  <h1>به دنیای شگفت‌انگیز شیمی خوش آمدید</h1>
+  <p>
+    در سایت شیمی یلمه، مفاهیم شیمی را از پایه تا پیشرفته
+    با درسنامه، مثال، تمرین و آزمون یاد بگیرید.
+  </p>
+  <a href="#grades" class="btn">شروع یادگیری</a>
+  <a href="#lessons" class="btn btn-primary">مشاهده درسنامه‌ها</a>
+</section>
+
+<section class="container" id="grades">
+  <h2 class="section-title">پایه‌های تحصیلی</h2>
+  <p class="section-desc">پایه موردنظر خود را انتخاب کنید.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="grade-icon">🧪</div>
+      <h3>شیمی دهم</h3>
+      <p>آشنایی با جهان اتم‌ها، مواد، گازها و ساختار مواد.</p>
+      <a href="#lessons" class="btn btn-primary" onclick="filterLessons('10')">درس‌های دهم</a>
+    </div>
+
+    <div class="card">
+      <div class="grade-icon">⚗️</div>
+      <h3>شیمی یازدهم</h3>
+      <p>مطالعه واکنش‌ها، محلول‌ها، اسیدها و بازها.</p>
+      <a href="#lessons" class="btn btn-primary" onclick="filterLessons('11')">درس‌های یازدهم</a>
+    </div>
+
+    <div class="card">
+      <div class="grade-icon">🔬</div>
+      <h3>شیمی دوازدهم</h3>
+      <p>آشنایی با الکتروشیمی، مواد آلی و مفاهیم پیشرفته.</p>
+      <a href="#lessons" class="btn btn-primary" onclick="filterLessons('12')">درس‌های دوازدهم</a>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="lessons">
+  <h2 class="section-title">درسنامه‌های شیمی</h2>
+  <p class="section-desc">برای مطالعه هر درس روی دکمه آن کلیک کنید.</p>
+
+  <div style="text-align:center;margin-bottom:25px">
+    <button class="btn btn-primary" onclick="filterLessons('all')">همه درس‌ها</button>
+    <button class="btn btn-primary" onclick="filterLessons('10')">دهم</button>
+    <button class="btn btn-primary" onclick="filterLessons('11')">یازدهم</button>
+    <button class="btn btn-primary" onclick="filterLessons('12')">دوازدهم</button>
+  </div>
+
+  <div class="lesson-list" id="lessonList"></div>
+</section>
+
+<section class="container" id="quiz">
+  <h2 class="section-title">آزمون شیمی</h2>
+  <p class="section-desc">دانسته‌های خود را با این آزمون کوتاه بسنجید.</p>
+
+  <div class="quiz-box">
+    <form id="quizForm">
+
+      <div class="question">
+        <h3>۱. کوچک‌ترین واحد یک عنصر که ویژگی‌های شیمیایی آن را حفظ می‌کند چیست؟</h3>
+        <label><input type="radio" name="q1" value="a"> مولکول</label>
+        <label><input type="radio" name="q1" value="b"> اتم</label>
+        <label><input type="radio" name="q1" value="c"> سلول</label>
+      </div>
+
+      <div class="question">
+        <h3>۲. فرمول شیمیایی آب کدام است؟</h3>
+        <label><input type="radio" name="q2" value="a"> CO₂</label>
+        <label><input type="radio" name="q2" value="b"> O₂</label>
+        <label><input type="radio" name="q2" value="c"> H₂O</label>
+      </div>
+
+      <div class="question">
+        <h3>۳. عدد اتمی نشان‌دهنده چیست؟</h3>
+        <label><input type="radio" name="q3" value="a"> تعداد پروتون‌ها</label>
+        <label><input type="radio" name="q3" value="b"> تعداد نوترون‌ها</label>
+        <label><input type="radio" name="q3" value="c"> تعداد لایه‌ها</label>
+      </div>
+
+      <div class="question">
+        <h3>۴. کدام مورد یک گاز نجیب است؟</h3>
+        <label><input type="radio" name="q4" value="a"> اکسیژن</label>
+        <label><input type="radio" name="q4" value="b"> نئون</label>
+        <label><input type="radio" name="q4" value="c"> هیدروژن</label>
+      </div>
+
+      <div class="question">
+        <h3>۵. کدام گزینه نشانه یک تغییر شیمیایی است؟</h3>
+        <label><input type="radio" name="q5" value="a"> خرد شدن کاغذ</label>
+        <label><input type="radio" name="q5" value="b"> ذوب شدن یخ</label>
+        <label><input type="radio" name="q5" value="c"> زنگ زدن آهن</label>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="checkQuiz()">ثبت پاسخ‌ها</button>
+      <button type="reset" class="btn" onclick="resetQuiz()">شروع دوباره</button>
+
+      <div id="quizResult"></div>
+    </form>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>ارتباط با ما</h2>
+  <p>شیمی یلمه | آموزش شیمی عبدالرشید یلمه</p>
+  <p>برای ارتباط و ارسال پیشنهادهای آموزشی می‌توانید از راه‌های ارتباطی مدرس استفاده کنید.</p>
+</section>
+
+</main>
+
+<section id="lessonPage">
+  <button class="back-btn" onclick="returnToList()">← بازگشت به درسنامه‌ها</button>
+  <article class="lesson-content" id="lessonContent"></article>
+  <button class="back-btn" onclick="returnToList()" style="margin-top:20px">بازگشت به فهرست درس‌ها</button>
+</section>
+
+<footer>
+  <p>© تمامی حقوق برای سایت شیمی یلمه محفوظ است.</p>
+  <p>آموزش شیمی عبدالرشید یلمه</p>
+</footer>
+
+<script>
+
+const lessons = [
+
+{
+id:"10-1",
+grade:"10",
+title:"ساختار اتم و ذرات زیراتمی",
+intro:"در این درس با ساختار اتم و ذرات تشکیل‌دهنده آن آشنا می‌شویم.",
+content:`
+<h2>۱. اتم چیست؟</h2>
+<p>اتم کوچک‌ترین واحد یک عنصر است که ویژگی‌های شیمیایی آن عنصر را حفظ می‌کند. تمام مواد از اتم‌ها ساخته شده‌اند. اتم‌ها می‌توانند با یکدیگر پیوند تشکیل دهند و مواد گوناگونی بسازند.</p>
+
+<h2>۲. اجزای اصلی اتم</h2>
+<p>اتم از سه ذره اصلی تشکیل شده است:</p>
+<ul>
+<li><b>پروتون:</b> دارای بار الکتریکی مثبت است و در هسته قرار دارد.</li>
+<li><b>نوترون:</b> بدون بار الکتریکی است و در هسته قرار دارد.</li>
+<li><b>الکترون:</b> دارای بار منفی است و در اطراف هسته حضور دارد.</li>
+</ul>
+
+<h2>۳. عدد اتمی</h2>
+<p>عدد اتمی برابر تعداد پروتون‌های موجود در هسته اتم است. عدد اتمی هر عنصر مشخص‌کننده هویت آن عنصر است.</p>
+<div class="formula">Z = Number of protons</div>
+
+<div class="example">
+<b>مثال:</b>
+<p>اتم کربن دارای ۶ پروتون است؛ بنابراین عدد اتمی آن برابر ۶ است.</p>
+</div>
+
+<h2>۴. عدد جرمی</h2>
+<p>عدد جرمی برابر مجموع تعداد پروتون‌ها و نوترون‌های هسته است.</p>
+<div class="formula">A = Z + N</div>
+<p>در این رابطه A عدد جرمی، Z عدد اتمی و N تعداد نوترون‌هاست.</p>
+
+<div class="example">
+<b>مثال حل‌شده:</b>
+<p>اتمی دارای ۱۱ پروتون و ۱۲ نوترون است. عدد جرمی آن را محاسبه کنید.</p>
+<p>حل: ۱۱ + ۱۲ = ۲۳</p>
+<p>پس عدد جرمی این اتم ۲۳ است.</p>
+</div>
+
+<h2>۵. ایزوتوپ‌ها</h2>
+<p>ایزوتوپ‌ها اتم‌های یک عنصر هستند که تعداد پروتون یکسان اما تعداد نوترون متفاوت دارند. به همین دلیل عدد اتمی آن‌ها برابر و عدد جرمی آن‌ها متفاوت است.</p>
+
+<div class="note">
+<b>نکته مهم:</b>
+<p>در یک اتم خنثی، تعداد الکترون‌ها با تعداد پروتون‌ها برابر است.</p>
+</div>
+
+<h2>۶. چند تمرین</h2>
+<ol>
+<li>اتمی ۸ پروتون و ۸ نوترون دارد. عدد جرمی آن چقدر است؟</li>
+<li>اگر عدد اتمی یک اتم ۱۷ باشد، چند پروتون دارد؟</li>
+<li>در یک اتم خنثی با ۱۲ پروتون چند الکترون وجود دارد؟</li>
+</ol>
+`
+},
+
+{
+id:"10-2",
+grade:"10",
+title:"جدول تناوبی عناصر",
+intro:"آشنایی با نظم عناصر در جدول تناوبی و ویژگی‌های آن‌ها.",
+content:`
+<h2>۱. جدول تناوبی چیست؟</h2>
+<p>جدول تناوبی جدولی است که عناصر شیمیایی را بر اساس افزایش عدد اتمی و شباهت ویژگی‌های شیمیایی مرتب می‌کند.</p>
+
+<h2>۲. دوره‌ها</h2>
+<p>ردیف‌های افقی جدول تناوبی را دوره می‌نامند. عناصر یک دوره در یک ردیف قرار می‌گیرند.</p>
+
+<h2>۳. گروه‌ها</h2>
+<p>ستون‌های عمودی جدول تناوبی گروه نام دارند. عناصر یک گروه معمولاً ویژگی‌های شیمیایی مشابهی دارند.</p>
+
+<h2>۴. فلزها، نافلزها و شبه‌فلزها</h2>
+<ul>
+<li><b>فلزها:</b> معمولاً رسانای خوب گرما و جریان الکتریکی هستند.</li>
+<li><b>نافلزها:</b> معمولاً رسانایی کمتری دارند و ویژگی‌های متفاوتی از فلزها نشان می‌دهند.</li>
+<li><b>شبه‌فلزها:</b> برخی ویژگی‌های فلزها و نافلزها را هم‌زمان دارند.</li>
+</ul>
+
+<div class="example">
+<b>مثال:</b>
+<p>آهن، مس و آلومینیوم از فلزها هستند. اکسیژن و گوگرد از نافلزها هستند.</p>
+</div>
+
+<h2>۵. گازهای نجیب</h2>
+<p>گازهای نجیب در گروه ۱۸ جدول تناوبی قرار دارند. این عناصر در شرایط معمول واکنش‌پذیری کمی دارند.</p>
+
+<h2>۶. نکته‌های مهم</h2>
+<ul>
+<li>هیدروژن در گروه اول قرار گرفته است، اما نافلز است.</li>
+<li>عناصر یک گروه معمولاً تعداد الکترون‌های لایه ظرفیت مشابهی دارند.</li>
+<li>عدد اتمی در جدول تناوبی از چپ به راست افزایش می‌یابد.</li>
+</ul>
+
+<h2>۷. تمرین</h2>
+<ol>
+<li>ردیف افقی جدول تناوبی چه نام دارد؟</li>
+<li>عناصر یک گروه چه ویژگی مشترکی دارند؟</li>
+<li>سه نمونه فلز نام ببرید.</li>
+</ol>
+`
+},
+
+{
+id:"10-3",
+grade:"10",
+title:"پیوندهای شیمیایی",
+intro:"چگونگی اتصال اتم‌ها و تشکیل مواد مختلف.",
+content:`
+<h2>۱. چرا اتم‌ها پیوند تشکیل می‌دهند؟</h2>
+<p>اتم‌ها با تشکیل پیوند شیمیایی می‌توانند به آرایش الکترونی پایدارتر برسند. پیوند شیمیایی نیروی جاذبه‌ای است که اتم‌ها را کنار یکدیگر نگه می‌دارد.</p>
+
+<h2>۲. پیوند یونی</h2>
+<p>پیوند یونی معمولاً در نتیجه انتقال الکترون از یک اتم به اتم دیگر شکل می‌گیرد. در این فرایند یون‌های مثبت و منفی ایجاد می‌شوند و نیروی جاذبه الکتریکی آن‌ها را کنار هم نگه می‌دارد.</p>
+
+<div class="example">
+<b>مثال: تشکیل سدیم کلرید</b>
+<p>اتم سدیم یک الکترون از دست می‌دهد و یون مثبت سدیم تشکیل می‌دهد. اتم کلر یک الکترون دریافت می‌کند و یون منفی کلرید ایجاد می‌شود. جاذبه میان این یون‌ها سبب تشکیل ترکیب سدیم کلرید می‌شود.</p>
+<div class="formula">Na⁺ + Cl⁻ → NaCl</div>
+</div>
+
+<h2>۳. پیوند کووالانسی</h2>
+<p>در پیوند کووالانسی، اتم‌ها یک یا چند جفت الکترون را با یکدیگر به اشتراک می‌گذارند.</p>
+
+<div class="example">
+<b>مثال:</b>
+<p>در مولکول هیدروژن، دو اتم هیدروژن یک جفت الکترون را به اشتراک می‌گذارند.</p>
+<div class="formula">H₂</div>
+</div>
+
+<h2>۴. تفاوت پیوند یونی و کووالانسی</h2>
+<ul>
+<li>در پیوند یونی، انتقال الکترون اتفاق می‌افتد.</li>
+<li>در پیوند کووالانسی، اشتراک الکترون اتفاق می‌افتد.</li>
+<li>ترکیب‌های یونی از یون‌های مثبت و منفی تشکیل می‌شوند.</li>
+<li>مواد کووالانسی معمولاً از مولکول‌ها یا شبکه‌های اتمی تشکیل می‌شوند.</li>
+</ul>
+
+<h2>۵. تمرین</h2>
+<ol>
+<li>پیوند یونی چگونه تشکیل می‌شود؟</li>
+<li>در پیوند کووالانسی چه اتفاقی برای الکترون‌ها می‌افتد؟</li>
+<li>ترکیب NaCl از چه یون‌هایی تشکیل شده است؟</li>
+</ol>
+`
+},
+
+{
+id:"11-1",
+grade:"11",
+title:"مفاهیم پایه واکنش‌های شیمیایی",
+intro:"آشنایی با واکنش شیمیایی، واکنش‌دهنده و فرآورده.",
+content:`
+<h2>۱. واکنش شیمیایی چیست؟</h2>
+<p>واکنش شیمیایی فرایندی است که در آن یک یا چند ماده به مواد جدیدی تبدیل می‌شوند. در این فرایند پیوندهای شیمیایی شکسته و پیوندهای جدید تشکیل می‌شوند.</p>
+
+<h2>۲. واکنش‌دهنده و فرآورده</h2>
+<p>موادی که در آغاز واکنش حضور دارند واکنش‌دهنده نامیده می‌شوند. موادی که در نتیجه واکنش ساخته می‌شوند فرآورده نام دارند.</p>
+
+<div class="formula">Reactants → Products</div>
+
+<h2>۳. قانون پایستگی جرم</h2>
+<p>در یک واکنش شیمیایی معمولی، جرم کل مواد پیش از واکنش با جرم کل مواد پس از واکنش برابر است.</p>
+
+<div class="example">
+<b>مثال:</b>
+<p>در واکنش تشکیل آب، هیدروژن و اکسیژن واکنش‌دهنده هستند و آب فرآورده است.</p>
+<div class="formula">2H₂ + O₂ → 2H₂O</div>
+</div>
+
+<h2>۴. موازنه واکنش‌ها</h2>
+<p>برای موازنه معادله شیمیایی باید تعداد اتم‌های هر عنصر در دو طرف معادله برابر باشد.</p>
+
+<div class="example">
+<b>مثال حل‌شده:</b>
+<p>معادله زیر را موازنه کنید:</p>
+<div class="formula">H₂ + O₂ → H₂O</div>
+<p>با قرار دادن ضریب مناسب، تعداد اتم‌ها در دو طرف برابر می‌شود:</p>
+<div class="formula">2H₂ + O₂ → 2H₂O</div>
+</div>
+
+<h2>۵. انواع واکنش‌ها</h2>
+<ul>
+<li>واکنش ترکیب</li>
+<li>واکنش تجزیه</li>
+<li>واکنش جانشینی</li>
+<li>واکنش سوختن</li>
+</ul>
+
+<h2>۶. تمرین</h2>
+<ol>
+<li>واکنش‌دهنده چیست؟</li>
+<li>فرآورده چیست؟</li>
+<li>معادله H₂ + Cl₂ → HCl را موازنه کنید.</li>
+</ol>
+`
+},
+
+{
+id:"11-2",
+grade:"11",
+title:"محلول‌ها و غلظت",
+intro:"شناخت محلول، حلال، حل‌شونده و روش محاسبه غلظت.",
+content:`
+<h2>۱. محلول چیست؟</h2>
+<p>محلول مخلوطی همگن است که از حل شدن یک یا چند ماده در ماده‌ای دیگر تشکیل می‌شود.</p>
+
+<h2>۲. حلال و حل‌شونده</h2>
+<ul>
+<li><b>حلال:</b> ماده‌ای که مواد دیگر در آن حل می‌شوند.</li>
+<li><b>حل‌شونده:</b> ماده‌ای که در حلال حل می‌شود.</li>
+</ul>
+
+<div class="example">
+<b>مثال:</b>
+<p>در محلول آب‌نمک، آب حلال و نمک حل‌شونده است.</p>
+</div>
+
+<h2>۳. غلظت محلول</h2>
+<p>غلظت نشان می‌دهد چه مقدار ماده حل‌شونده در مقدار مشخصی از محلول یا حلال وجود دارد.</p>
+
+<h2>۴. مولاریته</h2>
+<p>مولاریته برابر تعداد مول‌های حل‌شونده در هر لیتر محلول است.</p>
+<div class="formula">M = n / V</div>
+<p>در این رابطه n تعداد مول و V حجم محلول بر حسب لیتر است.</p>
+
+<div class="example">
+<b>مثال حل‌شده:</b>
+<p>اگر ۲ مول ماده در حجم ۱ لیتر محلول وجود داشته باشد، مولاریته چقدر است؟</p>
+<p>حل: ۲ تقسیم بر ۱ برابر ۲ مولار است.</p>
+<div class="formula">M = 2 / 1 = 2 mol/L</div>
+</div>
+
+<h2>۵. عوامل مؤثر بر انحلال‌پذیری</h2>
+<ul>
+<li>دمای محلول</li>
+<li>ماهیت حلال و حل‌شونده</li>
+<li>فشار، به‌ویژه برای گازها</li>
+</ul>
+
+<h2>۶. تمرین</h2>
+<ol>
+<li>در محلول شکر و آب، حلال کدام ماده است؟</li>
+<li>مولاریته چه مفهومی دارد؟</li>
+<li>اگر ۰٫۵ مول ماده در ۲ لیتر محلول باشد، مولاریته چقدر است؟</li>
+</ol>
+`
+},
+
+{
+id:"11-3",
+grade:"11",
+title:"اسیدها و بازها",
+intro:"آشنایی با ویژگی‌های اسیدها، بازها و مقیاس pH.",
+content:`
+<h2>۱. اسید چیست؟</h2>
+<p>در تعریف برونستد، اسید ماده‌ای است که می‌تواند پروتون یا یون هیدروژن را به ماده دیگری بدهد.</p>
+
+<h2>۲. باز چیست؟</h2>
+<p>در تعریف برونستد، باز ماده‌ای است که می‌تواند پروتون دریافت کند.</p>
+
+<h2>۳. مقیاس pH</h2>
+<p>pH معیاری برای بیان میزان اسیدی یا بازی بودن محلول‌های آبی است.</p>
+<div class="formula">pH = -log[H⁺]</div>
+
+<ul>
+<li>pH کمتر از ۷: محلول اسیدی</li>
+<li>pH برابر ۷: محلول خنثی در دمای ۲۵ درجه سلسیوس</li>
+<li>pH بیشتر از ۷: محلول بازی</li>
+</ul>
+
+<div class="example">
+<b>مثال:</b>
+<p>آب خالص در دمای ۲۵ درجه سلسیوس تقریباً pH برابر ۷ دارد.</p>
+</div>
+
+<h2>۴. شناساگرها</h2>
+<p>شناساگرها موادی هستند که با تغییر رنگ، اطلاعاتی درباره اسیدی یا بازی بودن محلول می‌دهند.</p>
+
+<h2>۵. واکنش خنثی شدن</h2>
+<p>در واکنش خنثی شدن، اسید و باز با یکدیگر واکنش می‌دهند و معمولاً نمک و آب تشکیل می‌شود.</p>
+<div class="formula">HCl + NaOH → NaCl + H₂O</div>
+
+<h2>۶. تمرین</h2>
+<ol>
+<li>اسید در تعریف برونستد چه ماده‌ای است؟</li>
+<li>محلولی با pH برابر ۳ اسیدی است یا بازی؟</li>
+<li>محصول معمول واکنش اسید و باز چیست؟</li>
+</ol>
+`
+},
+
+{
+id:"12-1",
+grade:"12",
+title:"سرعت واکنش‌های شیمیایی",
+intro:"آشنایی با سرعت واکنش و عوامل مؤثر بر آن.",
+content:`
+<h2>۱. سرعت واکنش چیست؟</h2>
+<p>سرعت واکنش شیمیایی نشان می‌دهد مقدار واکنش‌دهنده‌ها یا فرآورده‌ها در واحد زمان چگونه تغییر می‌کند.</p>
+
+<h2>۲. عوامل مؤثر بر سرعت واکنش</h2>
+<ul>
+<li><b>غلظت:</b> افزایش غلظت واکنش‌دهنده‌ها معمولاً باعث افزایش سرعت واکنش می‌شود.</li>
+<li><b>دما:</b> افزایش دما معمولاً سرعت واکنش را بیشتر می‌کند.</li>
+<li><b>سطح تماس:</b> افزایش سطح تماس مواد جامد می‌تواند سرعت واکنش را افزایش دهد.</li>
+<li><b>کاتالیزگر:</b> ماده‌ای که مسیر واکنش را تغییر می‌دهد و انرژی فعال‌سازی را کاهش می‌دهد.</li>
+</ul>
+
+<h2>۳. نظریه برخورد</h2>
+<p>برای انجام واکنش، ذرات باید با انرژی کافی و آرایش مناسب با یکدیگر برخورد کنند. هر برخوردی الزاماً به واکنش منجر نمی‌شود.</p>
+
+<div class="example">
+<b>مثال:</b>
+<p>پودر یک ماده جامد معمولاً سریع‌تر از تکه بزرگ همان ماده واکنش می‌دهد؛ زیرا سطح تماس بیشتری دارد.</p>
+</div>
+
+<h2>۴. انرژی فعال‌سازی</h2>
+<p>حداقل انرژی لازم برای آغاز یک واکنش شیمیایی را انرژی فعال‌سازی می‌نامند.</p>
+
+<h2>۵. کاتالیزگر</h2>
+<p>کاتالیزگر با فراهم کردن مسیری با انرژی فعال‌سازی کمتر، سرعت واکنش را افزایش می‌دهد و در پایان واکنش به طور خالص مصرف نمی‌شود.</p>
+
+<h2>۶. تمرین</h2>
+<ol>
+<li>سه عامل مؤثر بر سرعت واکنش را نام ببرید.</li>
+<li>انرژی فعال‌سازی چیست؟</li>
+<li>کاتالیزگر چگونه بر سرعت واکنش اثر می‌گذارد؟</li>
+</ol>
+`
+},
+
+{
+id:"12-2",
+grade:"12",
+title:"الکتروشیمی و سلول‌های الکتروشیمیایی",
+intro:"آشنایی با ارتباط واکنش‌های شیمیایی و انرژی الکتریکی.",
+content:`
+<h2>۱. الکتروشیمی چیست؟</h2>
+<p>الکتروشیمی شاخه‌ای از شیمی است که ارتباط میان واکنش‌های اکسایش و کاهش و انرژی الکتریکی را بررسی می‌کند.</p>
+
+<h2>۲. اکسایش و کاهش</h2>
+<ul>
+<li><b>اکسایش:</b> از دست دادن الکترون.</li>
+<li><b>کاهش:</b> دریافت الکترون.</li>
+</ul>
+
+<div class="note">
+<p>نکته مهم: اکسایش و کاهش همواره به صورت هم‌زمان رخ می‌دهند؛ زیرا الکترون از یک ماده به ماده دیگر منتقل می‌شود.</p>
+</div>
+
+<h2>۳. سلول گالوانی</h2>
+<p>سلول گالوانی وسیله‌ای است که انرژی شیمیایی یک واکنش خودبه‌خودی را به انرژی الکتریکی تبدیل می‌کند.</p>
+
+<h2>۴. آند و کاتد</h2>
+<ul>
+<li>آند: محل انجام اکسایش</li>
+<li>کاتد: محل انجام کاهش</li>
+</ul>
+
+<h2>۵. باتری‌ها</h2>
+<p>باتری‌ها از سلول‌های الکتروشیمیایی تشکیل شده‌اند و انرژی شیمیایی را به انرژی الکتریکی تبدیل می‌کنند.</p>
+
+<div class="example">
+<b>مثال:</b>
+<p>در هنگام کار یک باتری معمولی، واکنش‌های اکسایش و کاهش موجب حرکت الکترون‌ها در مدار خارجی می‌شوند.</p>
+</div>
+
+<h2>۶. تمرین</h2>
+<ol>
+<li>اکسایش به چه معناست؟</li>
+<li>کاهش به چه معناست؟</li>
+<li>در آند چه فرایندی رخ می‌دهد؟</li>
+</ol>
+`
+},
+
+{
+id:"12-3",
+grade:"12",
+title:"شیمی آلی و هیدروکربن‌ها",
+intro:"آشنایی با ترکیبات کربن و دسته‌های مهم هیدروکربن‌ها.",
+content:`
+<h2>۱. شیمی آلی چیست؟</h2>
+<p>شیمی آلی شاخه‌ای از شیمی است که ترکیبات کربن را بررسی می‌کند. بسیاری از مواد موجود در موجودات زنده و محصولات صنعتی دارای ترکیبات کربنی هستند.</p>
+
+<h2>۲. هیدروکربن‌ها</h2>
+<p>هیدروکربن‌ها ترکیباتی هستند که فقط از دو عنصر کربن و هیدروژن ساخته شده‌اند.</p>
+
+<h2>۳. آلکان‌ها</h2>
+<p>آلکان‌ها هیدروکربن‌های سیرشده هستند و میان اتم‌های کربن آن‌ها فقط پیوند یگانه وجود دارد.</p>
+<div class="formula">CₙH₂ₙ₊₂</div>
+
+<div class="example">
+<b>مثال:</b>
+<p>متان ساده‌ترین آلکان است.</p>
+<div class="formula">CH₄</div>
+</div>
+
+<h2>۴. آلکن‌ها</h2>
+<p>آلکن‌ها دست‌کم یک پیوند دوگانه کربن ـ کربن دارند. فرمول عمومی آلکن‌های زنجیری با یک پیوند دوگانه برابر است با:</p>
+<div class="formula">CₙH₂ₙ</div>
+
+<h2>۵. آلکین‌ها</h2>
+<p>آلکین‌ها دست‌کم یک پیوند سه‌گانه کربن ـ کربن دارند. فرمول عمومی آلکین‌های زنجیری با یک پیوند سه‌گانه برابر است با:</p>
+<div class="formula">CₙH₂ₙ₋₂</div>
+
+<h2>۶. کاربرد هیدروکربن‌ها</h2>
+<ul>
+<li>تولید سوخت</li>
+<li>ساخت مواد پلیمری</li>
+<li>تولید مواد اولیه صنایع شیمیایی</li>
+</ul>
+
+<h2>۷. تمرین</h2>
+<ol>
+<li>هیدروکربن از چه عناصری تشکیل شده است؟</li>
+<li>تفاوت آلکان و آلکن چیست؟</li>
+<li>فرمول عمومی آلکان‌ها را بنویسید.</li>
+</ol>
+`
+}
+
+];
+
+function renderLessons(filter="all") {
+  const list = document.getElementById("lessonList");
+  list.innerHTML = "";
+
+  const filtered = lessons.filter(lesson =>
+    filter === "all" || lesson.grade === filter
+  );
+
+  filtered.forEach(lesson => {
+    const gradeName = lesson.grade === "10" ? "دهم" :
+                      lesson.grade === "11" ? "یازدهم" : "دوازدهم";
+
+    const card = document.createElement("div");
+    card.className = "lesson-card";
+
+    const title = document.createElement("h3");
+    title.textContent = lesson.title;
+
+    const description = document.createElement("p");
+    description.textContent = "پایه " + gradeName + " | " + lesson.intro;
+
+    const button = document.createElement("button");
+    button.textContent = "مطالعه درسنامه";
+    button.addEventListener("click", () => showLesson(lesson.id));
+
+    card.appendChild(title);
+    card.appendChild(description);
+    card.appendChild(button);
+    list.appendChild(card);
+  });
+}
+
+function filterLessons(grade) {
+  renderLessons(grade);
+}
+
+function showLesson(id) {
+  const lesson = lessons.find(item => item.id === id);
+
+  if (!lesson) {
+    returnToList();
+    return;
+  }
+
+  document.getElementById("mainPage").style.display = "none";
+  document.getElementById("lessonPage").style.display = "block";
+
+  const gradeName = lesson.grade === "10" ? "دهم" :
+                    lesson.grade === "11" ? "یازدهم" : "دوازدهم";
+
+  document.getElementById("lessonContent").innerHTML = `
+    <div style="color:#64748b;margin-bottom:10px">پایه ${gradeName}</div>
+    <h1>${lesson.title}</h1>
+    <p style="color:#64748b">${lesson.intro}</p>
+    <hr style="border:0;border-top:1px solid #dbeafe;margin:20px 0">
+    ${lesson.content}
+  `;
+
+  history.pushState({lesson:id},"","#lesson-" + id);
+  window.scrollTo(0,0);
+}
+
+function returnToList() {
+  document.getElementById("lessonPage").style.display = "none";
+  document.getElementById("mainPage").style.display = "block";
+
+  history.pushState({},"",window.location.pathname + window.location.search);
+  window.scrollTo(0,0);
+}
+
+function checkQuiz() {
+  const answers = {
+    q1:"b",
+    q2:"c",
+    q3:"a",
+    q4:"b",
+    q5:"c"
+  };
+
+  let score = 0;
+  let unanswered = 0;
+
+  for (let key in answers) {
+    const selected = document.querySelector('input[name="' + key + '"]:checked');
+
+    if (!selected) {
+      unanswered++;
+    } else if (selected.value === answers[key]) {
+      score++;
+    }
+  }
+
+  const result = document.getElementById("quizResult");
+
+  if (unanswered > 0) {
+    result.textContent = "لطفاً به همه سؤال‌ها پاسخ دهید.";
+    return;
+  }
+
+  result.innerHTML = "نتیجه شما: " + score + " از ۵<br>" +
+    (score === 5 ? "عالی! همه پاسخ‌ها درست هستند." :
+     score >= 3 ? "خوب است! کمی بیشتر تمرین کنید." :
+     "بهتر است درسنامه‌ها را دوباره مطالعه کنید.");
+}
+
+function resetQuiz() {
+  document.getElementById("quizResult").textContent = "";
+}
+
+window.addEventListener("popstate", () => {
+  const match = location.hash.match(/^#lesson-(.+)$/);
+
+  if (match) {
+    const lesson = lessons.find(item => item.id === match[1]);
+    if (lesson) {
+      document.getElementById("mainPage").style.display = "none";
+      document.getElementById("lessonPage").style.display = "block";
+      document.getElementById("lessonContent").innerHTML =
+        `<h1>${lesson.title}</h1>${lesson.content}`;
+    }
+  } else {
+    document.getElementById("lessonPage").style.display = "none";
+    document.getElementById("mainPage").style.display = "block";
+  }
+});
+
+renderLessons();
+
+const initialMatch = location.hash.match(/^#lesson-(.+)$/);
+
+if (initialMatch) {
+  const initialLesson = lessons.find(item => item.id === initialMatch[1]);
+  if (initialLesson) {
+    document.getElementById("mainPage").style.display = "none";
+    document.getElementById("lessonPage").style.display = "block";
+    document.getElementById("lessonContent").innerHTML =
+      `<h1>${initialLesson.title}</h1>${initialLesson.content}`;
+  }
+}
+
+</script>
+
+</body>
+</html>
